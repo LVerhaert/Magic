@@ -1,5 +1,6 @@
 package liza.stage.springtest.model.enums;
 
+
 public enum Layout {
     normal,
     split,

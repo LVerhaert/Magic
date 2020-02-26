@@ -1,22 +1,37 @@
 
 package liza.stage.springtest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import liza.stage.springtest.model.enums.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
-@SuppressWarnings("unused")
+@Entity
 public class MagicCard {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @JsonIgnore
+    private Long id;
+
+    @JsonProperty("id")
+    private String idString;
 
     @JsonProperty("all_parts")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "magic_card_related_card",
+    joinColumns = {@JoinColumn(name="magic_card_id")},
+    inverseJoinColumns = {@JoinColumn(name = "related_card_id")})
     private List<RelatedCard> allParts;
     @JsonProperty("arena_id")
     private long arenaId;
     private String artist;
     @JsonProperty("artist_ids")
+    @ElementCollection
     private List<String> artistIds;
     private Boolean booster;
     @JsonProperty("border_color")
@@ -24,32 +39,39 @@ public class MagicCard {
     @JsonProperty("card_back_id")
     private String cardBackId;
     @JsonProperty("card_faces")
+    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name="magic_card_card_face")
     private List<CardFace> cardFaces;
     private long cmc;
     @JsonProperty("collector_number")
     private String collectorNumber;
     @JsonProperty("color_identity")
+    @ElementCollection
     private List<Color> colorIdentity;
     @JsonProperty("color_indicator")
+    @ElementCollection
     private List<Color> colorIndicator;
+    @ElementCollection
     private List<Color> colors;
     private Boolean digital;
     @JsonProperty("edhrec_rank")
     private long edhrecRank;
     @JsonProperty("flavor_text")
+    @Type(type = "org.hibernate.type.TextType")
     private String flavorText;
     private Boolean foil;
     private Frame frame;
     @JsonProperty("frame_effects")
+    @ElementCollection
     private List<FrameEffect> frameEffects;
     @JsonProperty("full_art")
     private Boolean fullArt;
+    @ElementCollection
     private List<Game> games;
     @JsonProperty("hand_modifier")
     private String handModifier;
     @JsonProperty("highres_image")
     private Boolean highresImage;
-    private String id;
     @JsonProperty("illustration_id")
     private String illustrationId;
     @JsonProperty("image_uris")
@@ -67,6 +89,7 @@ public class MagicCard {
     @JsonProperty("mtgo_id")
     private long mtgoId;
     @JsonProperty("multiverse_ids")
+    @ElementCollection
     private List<Long> multiverseIds;
     private String name;
     private Boolean nonfoil;
@@ -74,14 +97,16 @@ public class MagicCard {
     @JsonProperty("oracle_id")
     private String oracleId;
     @JsonProperty("oracle_text")
+    @Type(type = "org.hibernate.type.TextType")
     private String oracleText;
     private Boolean oversized;
     private String power;
     private Preview preview;
     @JsonProperty("prints_search_uri")
-    private Uri printsSearchUri;
+    private String printsSearchUri;
     private Boolean promo;
     @JsonProperty("promo_types")
+    @ElementCollection
     private List<String> promoTypes;
     private Rarity rarity;
     @JsonProperty("related_uris")
@@ -91,20 +116,20 @@ public class MagicCard {
     private Boolean reprint;
     private Boolean reserved;
     @JsonProperty("rulings_uri")
-    private Uri rulingsUri;
+    private String rulingsUri;
     @JsonProperty("scryfall_set_uri")
-    private Uri scryfallSetUri;
+    private String scryfallSetUri;
     @JsonProperty("scryfall_uri")
-    private Uri scryfallUri;
+    private String scryfallUri;
     private String set;
     @JsonProperty("set_name")
     private String setName;
     @JsonProperty("set_search_uri")
-    private Uri setSearchUri;
+    private String setSearchUri;
     @JsonProperty("set_type")
     private SetType setType;
     @JsonProperty("set_uri")
-    private Uri setUri;
+    private String setUri;
     @JsonProperty("story_spotlight")
     private Boolean storySpotlight;
     @JsonProperty("tcgplayer_id")
@@ -113,7 +138,7 @@ public class MagicCard {
     private String toughness;
     @JsonProperty("type_line")
     private String typeLine;
-    private Uri uri;
+    private String uri;
     private Boolean variation;
     @JsonProperty("variation_of")
     private String variationOf;

@@ -1,5 +1,7 @@
 package liza.stage.springtest.model.enums;
 
+import javax.persistence.Embeddable;
+
 public enum Language {
     en,
     es,

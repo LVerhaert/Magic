@@ -4,8 +4,10 @@ package liza.stage.springtest.model;
 import liza.stage.springtest.model.enums.Legality;
 import lombok.Data;
 
+import javax.persistence.Embeddable;
+
 @Data
-@SuppressWarnings("unused")
+@Embeddable
 public class Legalities {
 
     private Legality brawl;
