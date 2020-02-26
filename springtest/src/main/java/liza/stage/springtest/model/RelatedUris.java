@@ -8,10 +8,10 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class RelatedUris {
 
-    private String edhrec;
-    private String gatherer;
-    private String mtgtop8;
+    private Uri edhrec;
+    private Uri gatherer;
+    private Uri mtgtop8;
     @JsonProperty("tcgplayer_decks")
-    private String tcgplayerDecks;
+    private Uri tcgplayerDecks;
 
 }

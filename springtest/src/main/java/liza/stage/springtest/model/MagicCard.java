@@ -70,7 +70,7 @@ public class MagicCard {
     private List<Long> multiverseIds;
     private String name;
     private Boolean nonfoil;
-    private String object;
+    private ObjectType object;
     @JsonProperty("oracle_id")
     private String oracleId;
     @JsonProperty("oracle_text")
@@ -79,7 +79,7 @@ public class MagicCard {
     private String power;
     private Preview preview;
     @JsonProperty("prints_search_uri")
-    private String printsSearchUri;
+    private Uri printsSearchUri;
     private Boolean promo;
     @JsonProperty("promo_types")
     private List<String> promoTypes;
@@ -91,20 +91,20 @@ public class MagicCard {
     private Boolean reprint;
     private Boolean reserved;
     @JsonProperty("rulings_uri")
-    private String rulingsUri;
+    private Uri rulingsUri;
     @JsonProperty("scryfall_set_uri")
-    private String scryfallSetUri;
+    private Uri scryfallSetUri;
     @JsonProperty("scryfall_uri")
-    private String scryfallUri;
+    private Uri scryfallUri;
     private String set;
     @JsonProperty("set_name")
     private String setName;
     @JsonProperty("set_search_uri")
-    private String setSearchUri;
+    private Uri setSearchUri;
     @JsonProperty("set_type")
     private SetType setType;
     @JsonProperty("set_uri")
-    private String setUri;
+    private Uri setUri;
     @JsonProperty("story_spotlight")
     private Boolean storySpotlight;
     @JsonProperty("tcgplayer_id")
@@ -113,7 +113,7 @@ public class MagicCard {
     private String toughness;
     @JsonProperty("type_line")
     private String typeLine;
-    private String uri;
+    private Uri uri;
     private Boolean variation;
     @JsonProperty("variation_of")
     private String variationOf;

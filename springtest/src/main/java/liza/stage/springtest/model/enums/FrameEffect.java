@@ -4,6 +4,7 @@ public enum FrameEffect {
     legendary,
     miracle,
     nyxtouched,
+    nyxborn,
     draft,
     devoid,
     tombstone,
@@ -13,7 +14,7 @@ public enum FrameEffect {
     compasslanddfc,
     originpwdfc,
     mooneldrazidfc,
-    moonreversemoondfc,
     showcase,
+    waxingandwaningmoondfc,
     extendedart
 }

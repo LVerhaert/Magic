@@ -9,12 +9,12 @@ import lombok.Data;
 public class ImageUris {
 
     @JsonProperty("art_crop")
-    private String artCrop;
+    private Uri artCrop;
     @JsonProperty("border_crop")
-    private String borderCrop;
-    private String large;
-    private String normal;
-    private String png;
-    private String small;
+    private Uri borderCrop;
+    private Uri large;
+    private Uri normal;
+    private Uri png;
+    private Uri small;
 
 }

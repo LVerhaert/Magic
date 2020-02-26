@@ -16,6 +16,6 @@ public class RelatedCard {
     private ObjectType object;
     @JsonProperty("type_line")
     private String typeLine;
-    private String uri;
+    private Uri uri;
 
 }

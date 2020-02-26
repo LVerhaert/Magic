@@ -12,6 +12,6 @@ public class Preview {
     private String previewedAt;
     private String source;
     @JsonProperty("source_uri")
-    private String sourceUri;
+    private Uri sourceUri;
 
 }
