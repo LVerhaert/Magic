@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {UserListComponent} from './user-list.component';
+import {MagicCardListComponent} from './magiccard-list.component';
 
-describe('UserListComponent', () => {
-  let component: UserListComponent;
-  let fixture: ComponentFixture<UserListComponent>;
+describe('MagicCardListComponent', () => {
+  let component: MagicCardListComponent;
+  let fixture: ComponentFixture<MagicCardListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UserListComponent]
+      declarations: [MagicCardListComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserListComponent);
+    fixture = TestBed.createComponent(MagicCardListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

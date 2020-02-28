@@ -1,0 +1,20 @@
+<div class="magiccard my-5">
+  <div class="magiccard-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <!--        <th scope="col">Email</th> -->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let magiccard of magiccards">
+        <td>{{ magiccard.id }}</td>
+        <td>{{ magiccard.name }}</td>
+        <!--        <td><a href="mailto:{{ magiccard.email }}">{{ magiccard.email }}</a></td> -->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

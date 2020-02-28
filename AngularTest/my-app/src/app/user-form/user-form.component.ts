@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {User} from '../user';
+import {MagicCard} from '../magiccard';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../user.service';
+import {MagicCardService} from '../magiccard.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,22 +10,22 @@ import {UserService} from '../user.service';
 })
 export class UserFormComponent {
 
-  user: User;
+  magiccard: MagicCard;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private magiccardService: MagicCardService
   ) {
-    this.user = new User();
+    this.magiccard = new MagicCard();
   }
 
   onSubmit() {
-    this.userService.save(this.user).subscribe(result => this.gotoUserList());
+    this.magiccardService.save(this.magiccard).subscribe(result => this.gotoMagicCardList());
   }
 
-  gotoUserList() {
-    this.router.navigate(['/users']);
+  gotoMagicCardList() {
+    this.router.navigate(['/magiccards']);
   }
 
 

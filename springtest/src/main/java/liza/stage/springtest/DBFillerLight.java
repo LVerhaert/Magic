@@ -3,7 +3,6 @@ package liza.stage.springtest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import liza.stage.springtest.model.MagicCard;
-import liza.stage.springtest.repositories.MagicCardRepository;
 import liza.stage.springtest.service.MagicCardService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,11 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-//@SpringBootApplication
-public class DBFiller {
+@SpringBootApplication
+public class DBFillerLight {
 
     public static void main(String[] args) {
-        SpringApplication.run(DBFiller.class, args);
+        SpringApplication.run(DBFillerLight.class, args);
     }
 
     @Bean
@@ -29,7 +28,7 @@ public class DBFiller {
         });
         return args -> {
             System.out.println("Saving..");
-            magicCardList.forEach(magicCardService::save);
+            magicCardList.subList(0,99).forEach(magicCardService::save);
             System.out.println("Saved.");
             System.out.println(magicCardService.findAll().size());
 //            magicCardService.findAll().forEach(System.out::println);
