@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {MagicCard} from '../magiccard';
+import {MagicCard} from '../magiccards/magiccard';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MagicCardService} from '../magiccard.service';
+import {MagicCardService} from '../magiccards/magiccard.service';
 
 @Component({
   selector: 'app-user-form',

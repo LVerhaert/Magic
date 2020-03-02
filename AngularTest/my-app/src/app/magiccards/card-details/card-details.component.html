@@ -1,0 +1,10 @@
+<div *ngIf="magiccard$ | async as magiccard">
+  <h3>"{{magiccard.name}}"</h3>
+  <div>
+    <label>Name: </label>
+    <input [(ngModel)]="magiccard.name" placeholder="name"/>
+  </div>
+  <p>
+    <button (click)="goToMagicCards(magiccard)">Back</button>
+  </p>
+</div>

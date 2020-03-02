@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MagicCardListComponent} from './magiccard-list/magiccard-list.component';
+import {MagicCardListComponent} from './magiccards/magiccard-list/magiccard-list.component';
 import {UserFormComponent} from './user-form/user-form.component';
 
 
