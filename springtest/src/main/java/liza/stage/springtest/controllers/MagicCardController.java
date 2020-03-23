@@ -1,7 +1,8 @@
 package liza.stage.springtest.controllers;
 
-import liza.stage.springtest.model.MagicCard;
-import liza.stage.springtest.repositories.MagicCardRepository;
+import liza.stage.springtest.domain.MagicCard;
+import liza.stage.springtest.services.MagicCardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,20 +10,23 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class MagicCardController {
-    private final MagicCardRepository magicCardRepository;
+    @Autowired
+    private final MagicCardService magicCardService;
+//    @Autowired
+//    private final MagicCardRepository magicCardRepository;
 
-    public MagicCardController(MagicCardRepository magicCardRepository) {
-        this.magicCardRepository = magicCardRepository;
+    public MagicCardController(MagicCardService magicCardService) {
+        this.magicCardService = magicCardService;
     }
 
     @GetMapping("/magiccards")
     public List<MagicCard> getMagicCards() {
-        return (List<MagicCard>) magicCardRepository.findAll();
+        return magicCardService.findAll();
     }
 
     @PostMapping("/magiccards")
     void addMagicCard(@RequestBody MagicCard magicCard) {
-        magicCardRepository.save(magicCard);
+        magicCardService.save(magicCard);
     }
 
 }
