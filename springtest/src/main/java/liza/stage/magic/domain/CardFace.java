@@ -31,12 +31,14 @@ public class CardFace {
     private String loyalty;
     private String manaCost;
     @Type(type = "org.hibernate.type.TextType")
+    @Column(nullable = false)
     private String name;
     @Type(type = "org.hibernate.type.TextType")
     private String oracleText;
     private String power;
     private String toughness;
     @Type(type = "org.hibernate.type.TextType")
+//    @Column(nullable = false)
     private String typeLine;
 
 }

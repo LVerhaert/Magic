@@ -53,6 +53,10 @@ public class MagicCardImportService {
     public void save(MagicCardJson magicCardJson) {
         MagicCard magicCard = MagicCardMapper.INSTANCE.toEntity(magicCardJson);
         magicCardRepository.save(magicCard);
+        int size = magicCardRepository.findAll().size();
+        if (size % 100 == 0) {
+            System.out.println("Size is: " + size);
+        }
     }
 
     public List<MagicCard> getList() {

@@ -16,19 +16,30 @@ import java.util.List;
 @Entity
 public class MagicCard {
     /////////// Core
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String scryfallId;
+    @Column(nullable = false)
     private Language language;
+    @Column(nullable = false)
     private String oracleId;
+    @Column(nullable = false)
     private String scryfallUri;
+    @Column(nullable = false)
     private Rarity rarity;
+    @Column(nullable = false)
     private String setName;
+    @Column(nullable = false)
     private SetType setType;
+    @Column(nullable = false)
     private String scryfallSetUri;
+    @Column(nullable = false)
     private String setId;
     @Type(type = "org.hibernate.type.TextType")
+    @Column(nullable = false)
     private String name;
 
     /////////// Gameplay
@@ -41,6 +52,7 @@ public class MagicCard {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)
     private List<CardFace> cardFaces;
+    @Column(nullable = false)
     private long convManaCost;
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -52,6 +64,7 @@ public class MagicCard {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Color> colorIndicator;
     private String handModifier;
+    @Column(nullable = false)
     private Layout layout;
     private String lifeModifier;
     private String loyalty;
@@ -61,7 +74,9 @@ public class MagicCard {
     private String power;
     private String toughness;
     @Type(type = "org.hibernate.type.TextType")
+//    @Column(nullable = false)
     private String typeLine;
+    @Column(nullable = false)
     private Legalities legalities;
 
     ////////// Print
@@ -69,16 +84,20 @@ public class MagicCard {
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> artistIds;
+    @Column(nullable = false)
     private BorderColor borderColor;
+    @Column(nullable = false)
     private String cardBackId;
     @Type(type = "org.hibernate.type.TextType")
     private String flavorText;
+    @Column(nullable = false)
     private Frame frame;
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FrameEffect> frameEffects;
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(nullable = false)
     private List<Game> games;
     private String illustrationId;
     private ImageUris imageUris;
