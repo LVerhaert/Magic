@@ -15,10 +15,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class RelatedCardDtoController {
-    private final MagicCardService service;
+    private final MagicCardService magicCardService;
 
     @GetMapping("magiccard/{id}/related")
     public Map<MagicCardDto, Relationship> getRelatedCards(@PathVariable("id") String id) {
-        return service.findAllDtoRelatedTo(id);
+        return magicCardService.findAllDtoRelatedTo(id);
     }
 }

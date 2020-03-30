@@ -17,8 +17,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MagicCardImportService {
-    private final MagicCardEntitiesRepository repo;
-    List<MagicCardJson> magicCardJsonList;
+    private final MagicCardEntitiesRepository magicCardEntitiesRepository;
+    private final MagicCardImportMapper magicCardImportMapper;
+    private List<MagicCardJson> magicCardJsonList;
 
     public void parseJson() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -51,16 +52,16 @@ public class MagicCardImportService {
     }
 
     public void save(MagicCardJson magicCardJson) {
-        MagicCard magicCard = MagicCardImportMapper.INSTANCE.map(magicCardJson);
-        repo.save(magicCard);
-        int size = repo.findAll().size();
+        MagicCard magicCard = magicCardImportMapper.map(magicCardJson);
+        magicCardEntitiesRepository.save(magicCard);
+        int size = magicCardEntitiesRepository.findAll().size();
         if (size % 100 == 0) {
             System.out.println("Size is: " + size);
         }
     }
 
     public List<MagicCard> getList() {
-        return repo.findAll();
+        return magicCardEntitiesRepository.findAll();
     }
 
     public List<MagicCardJson> getJsonList() {

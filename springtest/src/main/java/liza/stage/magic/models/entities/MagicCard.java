@@ -44,9 +44,6 @@ public class MagicCard {
     /////////// Gameplay
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "magic_card_related_card",
-//            joinColumns = {@JoinColumn(name = "magic_card_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "related_card_id")})
     private List<RelatedCard> relatedCards;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)

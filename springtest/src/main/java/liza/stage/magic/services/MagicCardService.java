@@ -10,31 +10,27 @@ import liza.stage.magic.models.enums.Relationship;
 import liza.stage.magic.models.enums.SetType;
 import liza.stage.magic.repositories.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class MagicCardService {
-    @Autowired
-    private final MagicCardEntitiesRepository repo;
+    private final MagicCardEntitiesRepository magicCardEntitiesRepository;
+    private final MagicCardDtoMapper magicCardDtoMapper;
 
     ////////////// Entities
     public void save(MagicCard magicCard) {
-        repo.save(magicCard);
+        magicCardEntitiesRepository.save(magicCard);
     }
 
     public List<MagicCard> findAll() {
-        return repo.findAll();
+        return magicCardEntitiesRepository.findAll();
     }
 
     public MagicCard findById(String id) {
-        Optional<MagicCard> magicCard = repo.findById(id);
+        Optional<MagicCard> magicCard = magicCardEntitiesRepository.findById(id);
         return magicCard.orElse(null);
     }
 
@@ -104,12 +100,19 @@ public class MagicCardService {
     }
 
     private MagicCardDto toDto(MagicCard magicCard) {
-        return MagicCardDtoMapper.INSTANCE.map(magicCard);
+        return magicCardDtoMapper.map(magicCard);
     }
 
     public Map<MagicCardDto, Relationship> findAllDtoRelatedTo(String id) {
         MagicCardDto magicCard = findDtoById(id);
-        return magicCard.getRelatedCards();
+        Map<String, Relationship> relatedCards = magicCard.getRelatedCards();
+        Map<MagicCardDto, Relationship> related = new HashMap<>();
+        if (relatedCards != null) {
+            for (Map.Entry<String, Relationship> relatedCard : relatedCards.entrySet()) {
+                related.put(findDtoById(relatedCard.getKey()), relatedCard.getValue());
+            }
+        }
+        return related;
     }
 
     public Map<MagicCardDto, Relationship> findAllDtoRelatedTo(MagicCard magicCard) {

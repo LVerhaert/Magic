@@ -21,7 +21,7 @@ public class MagicCardDto {
     private String name;
 
     /////////// Gameplay
-    private Map<MagicCardDto, Relationship> relatedCards;
+    private Map<String, Relationship> relatedCards;
     private List<CardFaceDto> cardFaces;
     private long convManaCost;
     private List<Color> colors;

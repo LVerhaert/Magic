@@ -8,7 +8,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let magiccard of magiccards" [routerLink]="['/magiccard', magiccard.scryfallId]">
+      <tr *ngFor="let magiccard of magiccards" [routerLink]="['/magiccard', magiccard.scryfallId, 'related']">
         <td>{{ magiccard.scryfallId }}</td>
         <td>{{ magiccard.name }}</td>
       </tr>

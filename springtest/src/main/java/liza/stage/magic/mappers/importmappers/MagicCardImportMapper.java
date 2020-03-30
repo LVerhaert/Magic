@@ -11,14 +11,15 @@ import liza.stage.magic.models.json.RelatedCardJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = {RelatedCardImportMapper.class, CardFaceImportMapper.class})
 public abstract class MagicCardImportMapper {
-    public static MagicCardImportMapper INSTANCE = Mappers.getMapper(MagicCardImportMapper.class);
+
+    private RelatedCardImportMapper relatedCardImportMapper;
+    private CardFaceImportMapper cardFaceImportMapper;
 
     @Mapping(source = "idString", target = "scryfallId")
     @Mapping(source = "set", target = "setId")
@@ -55,7 +56,7 @@ public abstract class MagicCardImportMapper {
         List<CardFace> cardFaces = new ArrayList<>();
         if (cardFacesJson != null) {
             for (CardFaceJson cardFaceJson : cardFacesJson) {
-                CardFace cardFace = CardFaceImportMapper.INSTANCE.map(cardFaceJson);
+                CardFace cardFace = cardFaceImportMapper.map(cardFaceJson);
                 cardFaces.add(cardFace);
             }
         }
@@ -68,7 +69,7 @@ public abstract class MagicCardImportMapper {
         List<RelatedCard> relatedCards = new ArrayList<>();
         if (relatedCardsJson != null) {
             for (RelatedCardJson relatedCardJson : relatedCardsJson) {
-                RelatedCard relatedCard = RelatedCardImportMapper.INSTANCE.map(relatedCardJson);
+                RelatedCard relatedCard = relatedCardImportMapper.map(relatedCardJson);
                 relatedCards.add(relatedCard);
             }
         }
