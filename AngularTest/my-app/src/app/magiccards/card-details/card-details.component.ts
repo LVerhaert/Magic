@@ -10,7 +10,7 @@ import {switchMap} from 'rxjs/operators';
   templateUrl: './card-details.component.html',
   styleUrls: ['./card-details.component.scss']
 })
-export class MagicCardDetailsComponent implements OnInit {
+export class CardDetailsComponent implements OnInit {
 
   magiccard$: Observable<MagicCard>;
 
@@ -24,12 +24,12 @@ export class MagicCardDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.magiccard$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.service.find(params.get('id')))
+        this.service.find(params.get('scryfallId')))
     );
   }
 
   goToMagicCards(magicCard: MagicCard) {
-    let magicCardId = magicCard ? magicCard.id : null;
-    this.router.navigate(['/magiccard', {id: magicCardId}]);
+    let magicCardId = magicCard ? magicCard.scryfallId : null;
+    this.router.navigate(['/magiccard', {scryfallId: magicCardId}]);
   }
 }

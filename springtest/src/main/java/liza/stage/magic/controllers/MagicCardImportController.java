@@ -2,20 +2,32 @@ package liza.stage.magic.controllers;
 
 import liza.stage.magic.services.MagicCardImportService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class MagicCardImportController {
-    private final MagicCardImportService magicCardImportService;
+    private final MagicCardImportService importService;
 
     @GetMapping("/import")
     public String getMagicCards() {
-        magicCardImportService.parseJson();
-        System.out.println("Json-List: " + magicCardImportService.getJsonList().size());
-        System.out.println("List: " + magicCardImportService.getList().size());
-
-        return "hoi";
+        importService.parseJson();
+        String result = "Json-List: " + importService.getJsonList().size()
+                + "\nList: " + importService.getList().size();
+        System.out.println(result);
+        return result;
     }
+
+    @GetMapping("/importlight")
+    public String getMagicCardsLight() {
+        importService.parseJsonLight();
+        String result = "Json-List: " + importService.getJsonList().size()
+                + "\nList: " + importService.getList().size();
+        System.out.println(result);
+        return result;
+    }
+
 }

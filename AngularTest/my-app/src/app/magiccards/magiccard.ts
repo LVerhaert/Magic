@@ -1,5 +1,4 @@
 export class MagicCard {
-  id: string;
+  scryfallId: string;
   name: string;
-  longId: number;
 }

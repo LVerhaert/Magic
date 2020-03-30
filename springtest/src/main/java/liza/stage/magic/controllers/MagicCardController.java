@@ -1,30 +1,31 @@
 package liza.stage.magic.controllers;
 
-import liza.stage.magic.domain.MagicCard;
+import liza.stage.magic.models.entities.MagicCard;
 import liza.stage.magic.services.MagicCardService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class MagicCardController {
-    @Autowired
-    private final MagicCardService magicCardService;
+    private final MagicCardService service;
 
-    public MagicCardController(MagicCardService magicCardService) {
-        this.magicCardService = magicCardService;
-    }
-
-    @GetMapping("/magiccards")
+    @GetMapping("/magiccardsentity")
     public List<MagicCard> getMagicCards() {
-        return magicCardService.findAll();
+        return service.findAll();
     }
 
-    @PostMapping("/magiccards")
+    @PostMapping("/magiccardsentity")
     void addMagicCard(@RequestBody MagicCard magicCard) {
-        magicCardService.save(magicCard);
+        service.save(magicCard);
+    }
+
+    @GetMapping("/magiccardentity/{id}")
+    public MagicCard getMagicCard(@PathVariable("id") String id) {
+        return service.findById(id);
     }
 
 }

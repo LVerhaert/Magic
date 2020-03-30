@@ -9,11 +9,13 @@ import {FormsModule} from '@angular/forms';
 import {MagicCardService} from './magiccards/magiccard.service';
 import {MagicCardsModule} from './magiccards/magiccard.module';
 import {Router} from '@angular/router';
+import { CardRelatedComponent } from './magiccards/card-related/card-related.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserFormComponent,
+    CardRelatedComponent,
   ],
   imports: [
     BrowserModule,

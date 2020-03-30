@@ -10,21 +10,23 @@ import {map} from 'rxjs/operators';
 }*/)
 export class MagicCardService {
 
-  private magiccardsUrl: string;
-  private magiccardUrl: string;
+  private cardListUrl: string;
+  private cardDetailsUrl: string;
+  private cardRelatedUrl: string;
 
   constructor(private http: HttpClient) {
-    this.magiccardsUrl = 'http://localhost:8080/magiccards';
-    this.magiccardUrl = 'http://localhost:8080/magiccard/:id';
+    this.cardListUrl = 'http://localhost:8080/magiccards';
+    this.cardDetailsUrl = 'http://localhost:8080/magiccard/{id}';
+    this.cardRelatedUrl = 'http://localhost:8080/magiccard/{id}/related';
   }
 
   public findAll(): Observable<MagicCard[]> {
-    return this.http.get<MagicCard[]>(this.magiccardsUrl);
+    return this.http.get<MagicCard[]>(this.cardListUrl);
   }
 
   public find(id: string): Observable<MagicCard> {
     return this.findAll().pipe(
-      map((magiccards: MagicCard[]) => magiccards.find(magiccard => magiccard.id === id))
+      map((magiccards: MagicCard[]) => magiccards.find(magiccard => magiccard.scryfallId === id))
     );
   }
 
@@ -33,6 +35,6 @@ export class MagicCardService {
   // }
 
   public save(magiccard: MagicCard) {
-    return this.http.post<MagicCard>(this.magiccardsUrl, magiccard);
+    return this.http.post<MagicCard>(this.cardListUrl, magiccard);
   }
 }

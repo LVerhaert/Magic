@@ -2,10 +2,10 @@ package liza.stage.magic.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import liza.stage.magic.domain.MagicCard;
-import liza.stage.magic.jsonimport.model.MagicCardJson;
-import liza.stage.magic.mappers.importmappers.MagicCardMapper;
-import liza.stage.magic.repositories.MagicCardRepository;
+import liza.stage.magic.mappers.importmappers.MagicCardImportMapper;
+import liza.stage.magic.models.entities.MagicCard;
+import liza.stage.magic.models.json.MagicCardJson;
+import liza.stage.magic.repositories.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MagicCardImportService {
-    private final MagicCardRepository magicCardRepository;
+    private final MagicCardEntitiesRepository repo;
     List<MagicCardJson> magicCardJsonList;
 
     public void parseJson() {
@@ -51,16 +51,16 @@ public class MagicCardImportService {
     }
 
     public void save(MagicCardJson magicCardJson) {
-        MagicCard magicCard = MagicCardMapper.INSTANCE.toEntity(magicCardJson);
-        magicCardRepository.save(magicCard);
-        int size = magicCardRepository.findAll().size();
+        MagicCard magicCard = MagicCardImportMapper.INSTANCE.map(magicCardJson);
+        repo.save(magicCard);
+        int size = repo.findAll().size();
         if (size % 100 == 0) {
             System.out.println("Size is: " + size);
         }
     }
 
     public List<MagicCard> getList() {
-        return magicCardRepository.findAll();
+        return repo.findAll();
     }
 
     public List<MagicCardJson> getJsonList() {
