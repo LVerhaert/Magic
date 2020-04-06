@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 
 @Service
@@ -37,12 +38,12 @@ public class MagicCardImportService {
         ObjectMapper objectMapper = new ObjectMapper();
         magicCardJsonList = null;
         try {
-            magicCardJsonList = objectMapper.readValue(new File("D:\\lizav\\Documents\\Educatie\\Stage\\magic\\springtest\\src\\main\\resources\\scryfall-oracle-cards.json"), new TypeReference<List<MagicCardJson>>() {
+            magicCardJsonList = objectMapper.readValue(new File("D:\\lizav\\Documents\\Educatie\\Stage\\magic\\springtest\\src\\main\\resources\\scryfall-oracle-cards-light.json"), new TypeReference<List<MagicCardJson>>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        saveAll(magicCardJsonList.subList(0, 99));
+        saveAll(magicCardJsonList);
     }
 
     public void saveAll(List<MagicCardJson> magicCardJsonList) {

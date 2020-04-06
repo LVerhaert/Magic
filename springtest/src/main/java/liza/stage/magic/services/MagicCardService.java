@@ -2,6 +2,7 @@ package liza.stage.magic.services;
 
 import liza.stage.magic.mappers.dtomappers.MagicCardDtoMapper;
 import liza.stage.magic.models.dtos.MagicCardDto;
+import liza.stage.magic.models.dtos.PagingResult;
 import liza.stage.magic.models.entities.MagicCard;
 import liza.stage.magic.models.entities.RelatedCard;
 import liza.stage.magic.models.enums.Language;
@@ -119,5 +120,29 @@ public class MagicCardService {
         return findAllDtoRelatedTo(magicCard.getScryfallId());
     }
 
+    ////////////// Search
+    public List<MagicCardDto> searchDtoByName(String term) {
+        List<MagicCardDto> magicCards = new ArrayList<>();
+        for (MagicCard magicCard : findAll()) {
+            if (magicCard.getName().toLowerCase().contains(term.toLowerCase())) {
+                magicCards.add(toDto(magicCard));
+            }
+        }
+        return magicCards;
+    }
+
+    public PagingResult<MagicCardDto> findOnePageDto(int pageIndex, int pageSize) {
+        List<MagicCard> magicCards = findAll();
+        int begin = pageSize * (pageIndex-1);
+        int end = pageSize * (pageIndex-1) + pageSize;
+        if (begin >= magicCards.size() || begin < 0) {
+            System.out.println("Index out of bounds: begin=" + begin + ", end=" + end + ", size=" + magicCards.size());
+            return new PagingResult<>();
+        } else if (end >= magicCards.size()) {
+            end = magicCards.size();
+        }
+        System.out.println("begin=" + begin + ", end=" + end + ", size=" + magicCards.size());
+        return new PagingResult<MagicCardDto>(toDto(magicCards.subList(begin, end)));
+    }
 
 }

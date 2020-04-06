@@ -11,6 +11,7 @@ import liza.stage.magic.models.json.RelatedCardJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {RelatedCardImportMapper.class, CardFaceImportMapper.class})
 public abstract class MagicCardImportMapper {
 
+    @Autowired
     private RelatedCardImportMapper relatedCardImportMapper;
+    @Autowired
     private CardFaceImportMapper cardFaceImportMapper;
 
     @Mapping(source = "idString", target = "scryfallId")
