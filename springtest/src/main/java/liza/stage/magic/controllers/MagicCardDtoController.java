@@ -6,8 +6,6 @@ import liza.stage.magic.services.MagicCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,9 +18,13 @@ public class MagicCardDtoController {
     public PagingResult<MagicCardDto> getMagicCardsOnePage(@RequestParam(required = false) String pageIndex,
                                                            @RequestParam(required = false) String pageSize) {
         System.out.println("I tried this: pageIndex=" + pageIndex + ", pageSize=" + pageSize);
-        if (pageIndex == null || pageSize == null) {
-            return service.findOnePageDto(1, 10);
+        if (pageIndex == null) {
+            pageIndex = "0";
         }
+        if (pageSize == null || "0".equals(pageSize)) {
+            pageSize = "20";
+        }
+        System.out.println("Now trying this: pageIndex=" + pageIndex + ", pageSize=" + pageSize);
         return service.findOnePageDto(Integer.parseInt(pageIndex), Integer.parseInt(pageSize));
     }
 

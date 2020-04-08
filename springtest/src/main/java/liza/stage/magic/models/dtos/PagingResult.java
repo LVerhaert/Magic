@@ -7,9 +7,9 @@ public class PagingResult<T> {
     public List<T> data;
     public int total;
 
-    public PagingResult(List<T> data) {
+    public PagingResult(List<T> data, int total) {
         this.data = data;
-        total = data.size();
+        this.total = total;
     }
 
     public PagingResult() {

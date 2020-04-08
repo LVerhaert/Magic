@@ -133,16 +133,17 @@ public class MagicCardService {
 
     public PagingResult<MagicCardDto> findOnePageDto(int pageIndex, int pageSize) {
         List<MagicCard> magicCards = findAll();
-        int begin = pageSize * (pageIndex-1);
-        int end = pageSize * (pageIndex-1) + pageSize;
+        int begin = pageSize * (pageIndex);
+        int end = pageSize * (pageIndex) + pageSize;
         if (begin >= magicCards.size() || begin < 0) {
             System.out.println("Index out of bounds: begin=" + begin + ", end=" + end + ", size=" + magicCards.size());
-            return new PagingResult<>();
+            begin = 0;
+            end = pageSize;
         } else if (end >= magicCards.size()) {
             end = magicCards.size();
         }
         System.out.println("begin=" + begin + ", end=" + end + ", size=" + magicCards.size());
-        return new PagingResult<MagicCardDto>(toDto(magicCards.subList(begin, end)));
+        return new PagingResult<MagicCardDto>(toDto(magicCards.subList(begin, end)), magicCards.size());
     }
 
 }

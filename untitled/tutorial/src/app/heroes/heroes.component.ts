@@ -21,6 +21,8 @@ export class HeroesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.loadHeroesPage();
+    this.paginator.pageSize = 20;
     this.dataSource.counter$.pipe(
       tap((count) => {
         this.paginator.length = count;
@@ -33,8 +35,6 @@ export class HeroesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dataSource = new HeroesDataSource(this.heroService);
-    this.paginator.pageSize = 20;
-    this.loadHeroesPage();
   }
 
 

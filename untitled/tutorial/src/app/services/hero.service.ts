@@ -17,7 +17,7 @@ export class HeroService {
   constructor(private messageService: MessageService, private http: HttpClient) {
   }
 
-  getHeroesOnePage(page_index = 1, page_size: number): Observable<Hero[]> {
+  getHeroesOnePage(page_index: number, page_size: number): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl, {
       params: new HttpParams()
         .set('pageIndex', page_index.toString())

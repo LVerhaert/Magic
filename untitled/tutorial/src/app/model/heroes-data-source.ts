@@ -28,7 +28,7 @@ export class HeroesDataSource extends DataSource<Hero> {
     this.countSubject.complete();
   }
 
-  loadHeroes(pageIndex: number, pageSize: number) {
+  loadHeroes(pageIndex: number = 1, pageSize: number) {
     this.loadingSubject.next(true);
 
     this.heroService.getHeroesOnePage(pageIndex, pageSize)
