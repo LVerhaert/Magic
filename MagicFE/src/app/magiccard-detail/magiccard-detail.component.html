@@ -1,0 +1,7 @@
+<div *ngIf="magicCard">
+  <h2>{{magicCard.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{magicCard.scryfallId}}</div>
+  <div><label>name:<input [(ngModel)]="magicCard.name" placeholder="name"/>
+  </label></div>
+  <button (click)="goBack()">Back</button>
+</div>
