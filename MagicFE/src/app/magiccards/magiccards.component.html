@@ -6,24 +6,24 @@
   <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
     <ng-container matColumnDef="image" sticky>
       <th *matHeaderCellDef mat-header-cell>Image</th>
-      <td *matCellDef="let magicCard" mat-cell routerLink="/detail/{{magicCard.scryfallId}}">
+      <td *matCellDef="let magicCard" mat-cell routerLink="/magiccard/{{magicCard.scryfallId}}">
         <img [src]="magicCard.smallImageUri" class="mr-2" style="width: 50px">
       </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
       <th *matHeaderCellDef mat-header-cell>Type</th>
-      <td *matCellDef="let magicCard" mat-cell routerLink="/detail/{{magicCard.scryfallId}}">{{magicCard.typeLine}}</td>
+      <td *matCellDef="let magicCard" mat-cell routerLink="/magiccard/{{magicCard.scryfallId}}">{{magicCard.typeLine}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th *matHeaderCellDef mat-header-cell>Name</th>
-      <td *matCellDef="let magicCard" mat-cell routerLink="/detail/{{magicCard.scryfallId}}">{{magicCard.name}}</td>
+      <td *matCellDef="let magicCard" mat-cell routerLink="/magiccard/{{magicCard.scryfallId}}">{{magicCard.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="id">
       <th *matHeaderCellDef mat-header-cell>ID</th>
-      <td *matCellDef="let magicCard" mat-cell routerLink="/detail/{{magicCard.scryfallId}}">{{magicCard.scryfallId}}</td>
+      <td *matCellDef="let magicCard" mat-cell routerLink="/magiccard/{{magicCard.scryfallId}}">{{magicCard.scryfallId}}</td>
     </ng-container>
 
     <tr *matHeaderRowDef="displayedColumns; sticky : true" mat-header-row></tr>

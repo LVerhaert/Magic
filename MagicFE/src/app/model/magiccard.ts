@@ -1,20 +1,34 @@
-import {BorderColor, Color, Frame, FrameEffect, Game, Language, Layout, Relationship} from './enums';
+import {BorderColor, Color, Frame, FrameEffect, Game, Language, Layout, Legality, Relationship} from './enums';
 import {CardFace} from './card-face';
 import {Legalities} from './legalities';
 
-
 export interface MagicCard {
-  /////////// Core
-  scryfallId: string;
+
+  // Show
   name: string;
-  language: Language;
-  oracleId: string;
+  typeLine: string;
+
+  oracleText: string;
+  artist: string;
+  flavorText: string;
+
+  cardFaces: CardFace[];
+  legalities: Legalities;
+  games: Game[];
+
+  // Link
   scryfallUri: string;
   setId: string;
-
-  /////////// Gameplay
+  scryfallId: string;
   relatedCards: Map<string, Relationship>;
-  cardFaces: CardFace[];
+  artistIds: string[];
+  illustrationId: string;
+  smallImageUri: string;
+  largeImageUri: string;
+
+  // Search
+  language: Language;
+  oracleId: string;
   convManaCost: number;
   colors: Color[];
   colorIdentity: Color[];
@@ -24,23 +38,12 @@ export interface MagicCard {
   lifeModifier: string;
   loyalty: string;
   manaCost: string;
-  oracleText: string;
   power: string;
   toughness: string;
-  typeLine: string;
-  legalities: Legalities;
-
-  ////////// Print
-  artist: string;
-  artistIds: string[];
   borderColor: BorderColor;
   cardBackId: string;
-  flavorText: string;
   frame: Frame;
   frameEffects: FrameEffect[];
-  games: Game[];
-  illustrationId: string;
-  smallImageUri: string;
-  largeImageUri: string;
+
 }
 

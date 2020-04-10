@@ -46,18 +46,24 @@ public class MagicCardImportService {
     }
 
     public void saveAll(List<MagicCardJson> magicCardJsonList) {
+        int size = 0;
         for (MagicCardJson magicCardJson : magicCardJsonList) {
+            size++;
+            if (size % 100 == 0) {
+                System.out.println("Size is: " + size);
+            }
             save(magicCardJson);
         }
     }
 
     public void save(MagicCardJson magicCardJson) {
         MagicCardEntity magicCardEntity = magicCardImportMapper.map(magicCardJson);
+//        List<MagicCardEntity> mce = magicCardEntitiesRepository.findAll();
+//        int size = mce.size();
+//        if (size % 100 == 0) {
+//            System.out.println("Size is: " + size);
+//        }
         magicCardEntitiesRepository.save(magicCardEntity);
-        int size = magicCardEntitiesRepository.findAll().size();
-        if (size % 100 == 0) {
-            System.out.println("Size is: " + size);
-        }
     }
 
     public List<MagicCardEntity> getList() {

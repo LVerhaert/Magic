@@ -111,6 +111,8 @@ public class MagicCardService {
 
     ////////////// Search
     public List<MagicCardDto> searchByName(String term) {
+
+
         List<MagicCardDto> magicCards = new ArrayList<>();
         for (MagicCardEntity magicCardEntity : findAllEntities()) {
             if (magicCardEntity.getName().toLowerCase().contains(term.toLowerCase())) {

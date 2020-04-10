@@ -1,0 +1,28 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.magic-cards {
+  display: inline-grid;
+  max-width: 700px;
+}
+
+.magic-card {
+  width: 300px;
+  display: inline-grid;
+  align-items: stretch;
+}
+
+.side-list {
+  align-items: start;
+  width: 300px;
+}
+
+/*::ng-deep .mat-list .mat-list-item .mat-line{*/
+/*  word-wrap: break-word;*/
+/*  white-space: pre-wrap;*/
+/*}*/
+
+/*::ng-deep  .mat-list .mat-list-item{*/
+/*  height:initial!important;*/
+/*}*/
+
+

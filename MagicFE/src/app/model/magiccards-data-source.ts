@@ -4,7 +4,6 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {MagicCardService} from '../services/magiccard.service';
 import {catchError, finalize} from 'rxjs/operators';
 
-// export class CardsDataSource implements DataSource<MagicCard> {
 export class MagicCardsDataSource extends DataSource<MagicCard> {
   private magicCardsSubject = new BehaviorSubject<MagicCard[]>([]);
 
@@ -28,7 +27,7 @@ export class MagicCardsDataSource extends DataSource<MagicCard> {
     this.countSubject.complete();
   }
 
-  loadMagicCards(pageIndex: number = 1, pageSize: number) {
+  loadMagicCards(pageIndex: number, pageSize: number) {
     this.loadingSubject.next(true);
 
     this.magicCardService.getMagicCardsOnePage(pageIndex, pageSize)

@@ -1,7 +1,131 @@
+<!--<div *ngIf="magicCard">-->
+<!--<mat-grid-list cols="2">-->
+<!--  <mat-grid-tile *ngIf="magicCard.cardFaces.length > 0" class="magic-cards" colspan="2">-->
+<!--    <mat-card class="magic-card">-->
+<!--      <mat-card-header>-->
+<!--        <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>-->
+<!--        <mat-card-subtitle>{{magicCard.cardFaces[0].typeLine}}</mat-card-subtitle>-->
+<!--      </mat-card-header>-->
+<!--      <mat-card-content>-->
+<!--        <img mat-card-image src="{{magicCard.cardFaces[0].largeImageUri}}" alt="Card Image">-->
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.cardFaces[0].artist}}</p>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--    <mat-card class="magic-card">-->
+<!--      <mat-card-header>-->
+<!--        <mat-card-title>{{magicCard.cardFaces[1].name}}</mat-card-title>-->
+<!--        <mat-card-subtitle>{{magicCard.cardFaces[1].typeLine}}</mat-card-subtitle>-->
+<!--      </mat-card-header>-->
+<!--      <mat-card-content>-->
+<!--        <img mat-card-image src="{{magicCard.cardFaces[1].largeImageUri}}" alt="Card Image">-->
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.cardFaces[1].artist}}</p>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--  </mat-grid-tile>-->
+
+
+<!--  <mat-grid-tile *ngIf="magicCard.cardFaces == null || magicCard.cardFaces.length == 0" colspan="2">-->
+<!--    <mat-card class="magic-card">-->
+<!--      <mat-card-header>-->
+<!--        <mat-card-title>{{magicCard.name}}</mat-card-title>-->
+<!--        <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>-->
+<!--      </mat-card-header>-->
+<!--      <mat-card-content>-->
+<!--        <img mat-card-image src="{{magicCard.largeImageUri}}" alt="Card Image">-->
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.artist}}</p>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--  </mat-grid-tile>-->
+
+
+<!--<mat-grid-tile>-->
+<!--  <mat-list class="side-list">-->
+<!--    <div mat-subheader>Legalities</div>-->
+<!--    <mat-list-item *ngFor="let detail of legalitiesDetails" mat-line>-->
+<!--      <span>{{detail.name}}</span>-->
+<!--      <span>: {{detail.value}}</span>-->
+<!--    </mat-list-item>-->
+<!--  </mat-list>-->
+<!--</mat-grid-tile>-->
+
+<!--  <mat-grid-tile>-->
+<!--  <mat-list class="side-list" *ngIf="magicCard.games.length > 0">-->
+<!--    <div mat-subheader>Games</div>-->
+<!--    <mat-list-item *ngFor="let detail of gamesDetails" mat-line>-->
+<!--      <span>{{detail.name}}</span>-->
+<!--      <span>: {{detail.value}}</span>-->
+<!--    </mat-list-item>-->
+<!--  </mat-list>-->
+<!--  </mat-grid-tile>-->
+<!--</mat-grid-list>-->
+<!--</div>-->
+<!--<button mat-button (click)="goBack()">Back</button>-->
+
 <div *ngIf="magicCard">
-  <h2>{{magicCard.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{magicCard.scryfallId}}</div>
-  <div><label>name:<input [(ngModel)]="magicCard.name" placeholder="name"/>
-  </label></div>
-  <button (click)="goBack()">Back</button>
+    <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
+      <mat-card-header>
+        <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>
+        <mat-card-subtitle>{{magicCard.cardFaces[0].typeLine}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="{{magicCard.cardFaces[0].largeImageUri}}" alt="Card Image">
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.cardFaces[0].artist}}</p>-->
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
+      <mat-card-header>
+        <mat-card-title>{{magicCard.cardFaces[1].name}}</mat-card-title>
+        <mat-card-subtitle>{{magicCard.cardFaces[1].typeLine}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="{{magicCard.cardFaces[1].largeImageUri}}" alt="Card Image">
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.cardFaces[1].artist}}</p>-->
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="magic-card" *ngIf="magicCard.cardFaces == null || magicCard.cardFaces.length == 0">
+      <mat-card-header>
+        <mat-card-title>{{magicCard.name}}</mat-card-title>
+        <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="{{magicCard.largeImageUri}}" alt="Card Image">
+<!--        <div mat-subheader>Artist</div>-->
+<!--        <p mat-line>{{magicCard.artist}}</p>-->
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="magic-card">
+      <mat-card-title>Legalities</mat-card-title>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let detail of legalities">
+            <h2 mat-line>{{detail.name}}</h2>
+            <p mat-line>{{detail.value}}</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="magic-card" *ngIf="magicCard.games.length > 0">
+      <mat-card-title>Games</mat-card-title>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let game of magicCard.games">
+            <p mat-line>{{game.toString()}}</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
 </div>
+
+<button mat-button (click)="goBack()">Back</button>
+
+
+

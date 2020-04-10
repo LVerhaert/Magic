@@ -8,12 +8,16 @@ import {MagicCardsComponent} from './magiccards/magiccards.component';
 import {MagicCardDetailComponent} from './magiccard-detail/magiccard-detail.component';
 import {MessagesComponent} from './messages/messages.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {MagicCardSearchComponent} from './magiccard-search/magiccard-search.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MagicCardsComponent,
     MagicCardDetailComponent,
     MessagesComponent,
-    DashboardComponent,
     MagicCardSearchComponent
   ],
   imports: [
@@ -32,7 +35,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
