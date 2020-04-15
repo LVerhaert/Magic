@@ -10,6 +10,9 @@ import liza.stage.magic.models.enums.Relationship;
 import liza.stage.magic.models.enums.SetType;
 import liza.stage.magic.repositories.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,12 +25,22 @@ public class MagicCardService {
 
     ////////////// Entities
     public List<MagicCardEntity> findAllEntities() {
-        return magicCardEntitiesRepository.findAll();
+        return (List<MagicCardEntity>) magicCardEntitiesRepository.findAll();
     }
 
     public MagicCardEntity findEntityById(String id) {
         Optional<MagicCardEntity> magicCardEntity = magicCardEntitiesRepository.findById(id);
         return magicCardEntity.orElse(null);
+    }
+
+    public List<MagicCardEntity> findPaged(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<MagicCardEntity> page = magicCardEntitiesRepository.findAll(pageable);
+        return page.getContent();
+    }
+
+    public long getSize() {
+        return magicCardEntitiesRepository.count();
     }
 
     //////////////// Entity -> DTO
@@ -114,28 +127,31 @@ public class MagicCardService {
 
 
         List<MagicCardDto> magicCards = new ArrayList<>();
-        for (MagicCardEntity magicCardEntity : findAllEntities()) {
-            if (magicCardEntity.getName().toLowerCase().contains(term.toLowerCase())) {
-                magicCards.add(fromEntity(magicCardEntity));
-            }
-        }
+//        for (MagicCardEntity magicCardEntity : findAllEntities()) {
+//            if (magicCardEntity.getName().toLowerCase().contains(term.toLowerCase())) {
+//                magicCards.add(fromEntity(magicCardEntity));
+//            }
+//        }
         return magicCards;
     }
 
     /////////// Paging
     public PagingResult<MagicCardDto> findOnePageDto(int pageIndex, int pageSize) {
-        List<MagicCardEntity> magicCardEntities = findAllEntities();
-        int begin = pageSize * (pageIndex);
-        int end = pageSize * (pageIndex) + pageSize;
-        if (begin >= magicCardEntities.size() || begin < 0) {
-            System.out.println("Index out of bounds: begin=" + begin + ", end=" + end + ", size=" + magicCardEntities.size());
-            begin = 0;
-            end = pageSize;
-        } else if (end >= magicCardEntities.size()) {
-            end = magicCardEntities.size();
-        }
-        System.out.println("begin=" + begin + ", end=" + end + ", size=" + magicCardEntities.size());
-        return new PagingResult<>(fromEntity(magicCardEntities.subList(begin, end)), magicCardEntities.size());
+        List<MagicCardEntity> magicCardEntities = findPaged(pageIndex, pageSize);
+        return new PagingResult<>(fromEntity(magicCardEntities), getSize());
+
+//        List<MagicCardEntity> magicCardEntities = findAllEntities();
+//        int begin = pageSize * (pageIndex);
+//        int end = pageSize * (pageIndex) + pageSize;
+//        if (begin >= magicCardEntities.size() || begin < 0) {
+//            System.out.println("Index out of bounds: begin=" + begin + ", end=" + end + ", size=" + magicCardEntities.size());
+//            begin = 0;
+//            end = pageSize;
+//        } else if (end >= magicCardEntities.size()) {
+//            end = magicCardEntities.size();
+//        }
+//        System.out.println("begin=" + begin + ", end=" + end + ", size=" + magicCardEntities.size());
+//        return new PagingResult<>(fromEntity(magicCardEntities.subList(begin, end)), magicCardEntities.size());
     }
 
 }

@@ -8,16 +8,14 @@ import {MagicCardsComponent} from './magiccards/magiccards.component';
 import {MagicCardDetailComponent} from './magiccard-detail/magiccard-detail.component';
 import {MessagesComponent} from './messages/messages.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
-import {MagicCardSearchComponent} from './magiccard-search/magiccard-search.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -25,22 +23,20 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MagicCardsComponent,
     MagicCardDetailComponent,
     MessagesComponent,
-    MagicCardSearchComponent
   ],
   imports: [
-    MatPaginatorModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
     MatCardModule,
-    MatButtonModule,
     MatListModule,
-    MatIconModule,
-    MatGridListModule
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

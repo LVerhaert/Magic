@@ -9,7 +9,7 @@ import {Legality} from '../model/enums';
 @Component({
   selector: 'app-magiccard-detail',
   templateUrl: './magiccard-detail.component.html',
-  styleUrls: ['./magiccard-detail.component.css']
+  styleUrls: ['./magiccard-detail.component.scss']
 })
 export class MagicCardDetailComponent implements OnInit, AfterContentChecked {
 

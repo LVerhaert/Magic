@@ -67,7 +67,7 @@ public class MagicCardImportService {
     }
 
     public List<MagicCardEntity> getList() {
-        return magicCardEntitiesRepository.findAll();
+        return (List<MagicCardEntity>)magicCardEntitiesRepository.findAll();
     }
 
     public List<MagicCardJson> getJsonList() {

@@ -5,9 +5,9 @@ import java.util.List;
 
 public class PagingResult<T> {
     public List<T> data;
-    public int total;
+    public long total;
 
-    public PagingResult(List<T> data, int total) {
+    public PagingResult(List<T> data, long total) {
         this.data = data;
         this.total = total;
     }

@@ -8,7 +8,7 @@ import {tap} from 'rxjs/operators';
 @Component({
   selector: 'app-magiccards',
   templateUrl: './magiccards.component.html',
-  styleUrls: ['./magiccards.component.css']
+  styleUrls: ['./magiccards.component.scss']
 })
 export class MagicCardsComponent implements OnInit, AfterViewInit {
 
