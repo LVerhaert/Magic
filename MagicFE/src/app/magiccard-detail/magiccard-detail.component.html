@@ -1,19 +1,15 @@
 
 <div *ngIf="magicCard">
     <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
-      <mat-card-header>
         <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>
         <mat-card-subtitle>{{magicCard.cardFaces[0].typeLine}}</mat-card-subtitle>
-      </mat-card-header>
       <mat-card-content>
         <img mat-card-image src="{{magicCard.cardFaces[0].largeImageUri}}" alt="Card Image">
       </mat-card-content>
     </mat-card>
     <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
-      <mat-card-header>
         <mat-card-title>{{magicCard.cardFaces[1].name}}</mat-card-title>
         <mat-card-subtitle>{{magicCard.cardFaces[1].typeLine}}</mat-card-subtitle>
-      </mat-card-header>
       <mat-card-content>
         <img mat-card-image src="{{magicCard.cardFaces[1].largeImageUri}}" alt="Card Image">
       </mat-card-content>
@@ -21,10 +17,8 @@
 
 
     <mat-card class="magic-card" *ngIf="magicCard.cardFaces == null || magicCard.cardFaces.length == 0">
-      <mat-card-header>
-        <mat-card-title>{{magicCard.name}}</mat-card-title>
-        <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>
-      </mat-card-header>
+      <mat-card-title>{{magicCard.name}}</mat-card-title>
+      <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>
       <mat-card-content>
         <img mat-card-image src="{{magicCard.largeImageUri}}" alt="Card Image">
       </mat-card-content>
@@ -54,7 +48,7 @@
     </mat-card>
 </div>
 
-<button mat-button (click)="goBack()">Back</button>
+<button mat-raised-button color="primary" (click)="goBack()">Back</button>
 
 
 

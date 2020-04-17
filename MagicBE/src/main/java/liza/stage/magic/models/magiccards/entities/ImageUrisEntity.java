@@ -1,0 +1,16 @@
+package liza.stage.magic.models.magiccards.entities;
+
+import lombok.Data;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
+
+@Data
+@Embeddable
+@Table(name = "imageuris", schema = "magiccards")
+public class ImageUrisEntity {
+
+    private String large;
+    private String small;
+
+}

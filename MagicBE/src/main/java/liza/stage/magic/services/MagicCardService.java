@@ -1,14 +1,14 @@
 package liza.stage.magic.services;
 
 import liza.stage.magic.mappers.dtomappers.MagicCardDtoMapper;
-import liza.stage.magic.models.dtos.MagicCardDto;
-import liza.stage.magic.models.dtos.PagingResult;
-import liza.stage.magic.models.entities.MagicCardEntity;
-import liza.stage.magic.models.enums.Language;
-import liza.stage.magic.models.enums.Rarity;
-import liza.stage.magic.models.enums.Relationship;
-import liza.stage.magic.models.enums.SetType;
-import liza.stage.magic.repositories.MagicCardEntitiesRepository;
+import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.dtos.PagingResult;
+import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
+import liza.stage.magic.models.magiccards.enums.Language;
+import liza.stage.magic.models.magiccards.enums.Rarity;
+import liza.stage.magic.models.magiccards.enums.Relationship;
+import liza.stage.magic.models.magiccards.enums.SetType;
+import liza.stage.magic.repositories.magiccards.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,16 +44,21 @@ public class MagicCardService {
     }
 
     //////////////// Entity -> DTO
-    private List<MagicCardDto> fromEntity(List<MagicCardEntity> magicCardEntityEntities) {
+    private List<MagicCardDto> fromEntity(List<MagicCardEntity> magicCardEntities) {
         List<MagicCardDto> magicCards = new ArrayList<>();
-        for (MagicCardEntity magicCardEntity : magicCardEntityEntities) {
+        for (MagicCardEntity magicCardEntity : magicCardEntities) {
             magicCards.add(fromEntity(magicCardEntity));
         }
         return magicCards;
     }
 
     private MagicCardDto fromEntity(MagicCardEntity magicCardEntity) {
-        return magicCardDtoMapper.map(magicCardEntity);
+        MagicCardDto magicCardDto = magicCardDtoMapper.map(magicCardEntity);
+        if (magicCardDto.getCardFaces().size() > 0) {
+            magicCardDto.setSmallImageUri(magicCardDto.getCardFaces().get(0).getSmallImageUri());
+            magicCardDto.setLargeImageUri(magicCardDto.getCardFaces().get(0).getLargeImageUri());
+        }
+        return magicCardDto;
     }
 
     ////////////// DTO's

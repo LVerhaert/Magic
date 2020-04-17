@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {MagicCardsComponent} from './magiccards/magiccards.component';
 import {MagicCardDetailComponent} from './magiccard-detail/magiccard-detail.component';
 import {MessagesComponent} from './messages/messages.component';
+
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
@@ -16,6 +17,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSliderModule} from "@angular/material/slider";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {MatSliderModule} from "@angular/material/slider";
     MatTableModule,
     MatPaginatorModule,
     MatSliderModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

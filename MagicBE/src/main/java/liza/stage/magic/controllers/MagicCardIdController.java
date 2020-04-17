@@ -1,8 +1,8 @@
 package liza.stage.magic.controllers;
 
 
-import liza.stage.magic.models.dtos.MagicCardDto;
-import liza.stage.magic.models.enums.Relationship;
+import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.enums.Relationship;
 import liza.stage.magic.services.MagicCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;

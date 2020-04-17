@@ -1,7 +1,7 @@
 package liza.stage.magic.mappers.importmappers;
 
-import liza.stage.magic.models.entities.RelatedCardEntity;
-import liza.stage.magic.models.json.RelatedCardJson;
+import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
+import liza.stage.magic.models.magiccards.json.RelatedCardJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

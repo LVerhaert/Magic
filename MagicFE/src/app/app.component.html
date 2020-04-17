@@ -1,4 +1,6 @@
-<h1>{{title}}</h1>
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+<mat-sidenav-container>
+<h1 class="mat-app-background">{{title}}</h1>
+<router-outlet class="mat-app-background"></router-outlet>
+<app-messages class="mat-app-background"></app-messages>
 <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+</mat-sidenav-container>

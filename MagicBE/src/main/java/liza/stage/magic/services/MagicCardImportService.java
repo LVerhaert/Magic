@@ -3,9 +3,9 @@ package liza.stage.magic.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import liza.stage.magic.mappers.importmappers.MagicCardImportMapper;
-import liza.stage.magic.models.entities.MagicCardEntity;
-import liza.stage.magic.models.json.MagicCardJson;
-import liza.stage.magic.repositories.MagicCardEntitiesRepository;
+import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
+import liza.stage.magic.models.magiccards.json.MagicCardJson;
+import liza.stage.magic.repositories.magiccards.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package liza.stage.magic.mappers.importmappers;
 
-import liza.stage.magic.models.entities.CardFaceEntity;
-import liza.stage.magic.models.enums.Color;
-import liza.stage.magic.models.json.CardFaceJson;
+import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
+import liza.stage.magic.models.magiccards.enums.Color;
+import liza.stage.magic.models.magiccards.json.CardFaceJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

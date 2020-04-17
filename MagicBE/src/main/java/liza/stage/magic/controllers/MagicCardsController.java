@@ -1,7 +1,7 @@
 package liza.stage.magic.controllers;
 
-import liza.stage.magic.models.dtos.MagicCardDto;
-import liza.stage.magic.models.dtos.PagingResult;
+import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.dtos.PagingResult;
 import liza.stage.magic.services.MagicCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

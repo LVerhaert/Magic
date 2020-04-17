@@ -1,9 +1,9 @@
 package liza.stage.magic.mappers.dtomappers;
 
-import liza.stage.magic.models.dtos.MagicCardDto;
-import liza.stage.magic.models.entities.MagicCardEntity;
-import liza.stage.magic.models.entities.RelatedCardEntity;
-import liza.stage.magic.models.enums.Relationship;
+import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
+import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
+import liza.stage.magic.models.magiccards.enums.Relationship;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

@@ -1,13 +1,13 @@
 package liza.stage.magic.mappers.importmappers;
 
-import liza.stage.magic.models.entities.CardFaceEntity;
-import liza.stage.magic.models.entities.MagicCardEntity;
-import liza.stage.magic.models.entities.RelatedCardEntity;
-import liza.stage.magic.models.enums.Color;
-import liza.stage.magic.models.enums.Frame;
-import liza.stage.magic.models.json.CardFaceJson;
-import liza.stage.magic.models.json.MagicCardJson;
-import liza.stage.magic.models.json.RelatedCardJson;
+import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
+import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
+import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
+import liza.stage.magic.models.magiccards.enums.Color;
+import liza.stage.magic.models.magiccards.enums.Frame;
+import liza.stage.magic.models.magiccards.json.CardFaceJson;
+import liza.stage.magic.models.magiccards.json.MagicCardJson;
+import liza.stage.magic.models.magiccards.json.RelatedCardJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
