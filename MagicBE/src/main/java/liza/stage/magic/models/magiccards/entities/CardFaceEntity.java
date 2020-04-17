@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "cardface")
-@Table(name = "cardface", schema = "magiccards")
+@Table(name = "cardface")
 public class CardFaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

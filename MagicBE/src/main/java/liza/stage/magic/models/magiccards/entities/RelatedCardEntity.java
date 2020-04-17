@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "relatedcard")
-@Table(name = "relatedcard", schema = "magiccards")
+@Table(name = "relatedcard")
 public class RelatedCardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

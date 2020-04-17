@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Data
 @Embeddable
-@Table(name = "imageuris", schema = "magiccards")
+@Table(name = "imageuris")
 public class ImageUrisEntity {
 
     private String large;

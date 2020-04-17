@@ -1,5 +1,6 @@
 package liza.stage.magic.models.magiccards.dtos;
 
+import liza.stage.magic.models.magiccards.enums.*;
 import lombok.Data;
 
 import java.util.List;

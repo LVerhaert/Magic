@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Data
 @Embeddable
-@Table(name = "legalities", schema = "magiccards")
+@Table(name = "legalities")
 public class LegalitiesEntity {
 
     private Legality brawl;

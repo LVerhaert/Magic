@@ -1,5 +1,6 @@
 package liza.stage.magic.models.magiccards.entities;
 
+import liza.stage.magic.models.magiccards.enums.*;
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "magiccard")
-@Table(name = "magiccard", schema = "magiccards")
+@Table(name = "magiccard")
 public class MagicCardEntity {
     /////////// Core
 //    @Id
@@ -68,7 +69,6 @@ public class MagicCardEntity {
     private String power;
     private String toughness;
     @Type(type = "org.hibernate.type.TextType")
-//    @Column(nullable = false)
     private String typeLine;
     @Column(nullable = false)
     private LegalitiesEntity legalities;
