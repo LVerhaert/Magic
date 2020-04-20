@@ -20,6 +20,10 @@ public abstract class MagicCardDtoMapper {
     @Mapping(source = "imageUris.large", target = "largeImageUri")
     public abstract MagicCardDto map(MagicCardEntity magicCardEntity);
 
+    @Mapping(source = "smallImageUri", target = "imageUris.small")
+    @Mapping(source = "largeImageUri", target = "imageUris.large")
+    @Mapping(source = "relatedCards", target = "relatedCards", ignore = true)
+    public abstract MagicCardEntity map(MagicCardDto magicCardDto);
 
     @Named("toRelatedCards")
     Map<String, Relationship> toRelatedCards(List<RelatedCardEntity> relatedCardEntityList) {
@@ -33,4 +37,5 @@ public abstract class MagicCardDtoMapper {
         }
         return relatedCards;
     }
+
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import liza.stage.magic.mappers.importmappers.MagicCardImportMapper;
 import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
 import liza.stage.magic.models.magiccards.json.MagicCardJson;
-import liza.stage.magic.repositories.magiccards.MagicCardEntitiesRepository;
+import liza.stage.magic.repositories.MagicCardEntitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,20 +58,16 @@ public class MagicCardImportService {
 
     public void save(MagicCardJson magicCardJson) {
         MagicCardEntity magicCardEntity = magicCardImportMapper.map(magicCardJson);
-//        List<MagicCardEntity> mce = magicCardEntitiesRepository.findAll();
-//        int size = mce.size();
-//        if (size % 100 == 0) {
-//            System.out.println("Size is: " + size);
-//        }
         magicCardEntitiesRepository.save(magicCardEntity);
     }
 
-    public List<MagicCardEntity> getList() {
-        return (List<MagicCardEntity>)magicCardEntitiesRepository.findAll();
+
+    public long getJsonListSize() {
+        return magicCardJsonList.size();
     }
 
-    public List<MagicCardJson> getJsonList() {
-        return magicCardJsonList;
+    public long getListSize() {
+        return magicCardEntitiesRepository.count();
     }
 
 }

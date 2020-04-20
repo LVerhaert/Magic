@@ -18,8 +18,8 @@ public class ImportController {
     public String getMagicCards() {
         System.out.println("localhost:8080/import called");
         magicCardImportService.parseJson();
-        String result = "Json-List: " + magicCardImportService.getJsonList().size()
-                + "\nList: " + magicCardImportService.getList().size();
+        String result = "Json-List: " + magicCardImportService.getJsonListSize()
+                + "\nList: " + magicCardImportService.getListSize();
         System.out.println(result);
         return result;
     }
@@ -29,8 +29,8 @@ public class ImportController {
     public String getMagicCardsLight() {
         System.out.println("localhost:8080/importlight called");
         magicCardImportService.parseJsonLight();
-        String result = "Json-List: " + magicCardImportService.getJsonList().size()
-                + "\nList: " + magicCardImportService.getList().size();
+        String result = "Json-List: " + magicCardImportService.getJsonListSize()
+                + "\nList: " + magicCardImportService.getListSize();
         System.out.println(result);
         return result;
     }

@@ -1,6 +1,8 @@
 package liza.stage.magic.models.players.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,11 +21,11 @@ public class PlayerEntity {
     @JoinColumn(name = "maincollection_id")
     private MainCollectionEntity mainCollection;
 
-    @OneToMany//(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "deck_player",
             joinColumns = @JoinColumn(name = "player_id"),
             inverseJoinColumns = @JoinColumn(name = "deck_id"))
-//    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<DeckEntity> decks;
 
 }

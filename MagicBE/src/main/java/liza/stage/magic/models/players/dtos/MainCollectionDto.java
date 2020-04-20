@@ -6,4 +6,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MainCollectionDto extends CollectionDto {
+    public MainCollectionDto() {
+        super();
+    }
 }

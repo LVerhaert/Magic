@@ -1,4 +1,4 @@
-package liza.stage.magic.repositories.players;
+package liza.stage.magic.repositories;
 
 import liza.stage.magic.models.players.entities.MainCollectionEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;

@@ -13,4 +13,8 @@ public abstract class CardFaceDtoMapper {
     @Mapping(source = "imageUris.large", target = "largeImageUri")
     public abstract CardFaceDto map(CardFaceEntity cardFaceEntity);
 
+    @Mapping(source = "smallImageUri", target = "imageUris.small")
+    @Mapping(source = "largeImageUri", target = "imageUris.large")
+    public abstract CardFaceEntity map(CardFaceDto cardFaceDto);
+
 }

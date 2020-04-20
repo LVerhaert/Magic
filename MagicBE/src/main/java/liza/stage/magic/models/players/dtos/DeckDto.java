@@ -7,4 +7,13 @@ import lombok.EqualsAndHashCode;
 @Data
 public class DeckDto extends CollectionDto {
     private String deckName;
+
+    public DeckDto() {
+        super();
+    }
+
+    public DeckDto(String name) {
+        super();
+        deckName = name;
+    }
 }

@@ -1,15 +1,22 @@
 package liza.stage.magic.models.players.dtos;
 
-import liza.stage.magic.models.players.entities.DeckEntity;
-import liza.stage.magic.models.players.entities.MainCollectionEntity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class PlayerDto {
     private int id;
     private String name;
-    private MainCollectionEntity mainCollection;
-    private List<DeckEntity> decks;
+    private MainCollectionDto mainCollection;
+    private List<DeckDto> decks;
+
+    public PlayerDto(String name) {
+        this.name = name;
+        mainCollection = new MainCollectionDto();
+        decks = new ArrayList<>();
+    }
 }

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan("liza.stage.magic.models.*")
-@EnableJpaRepositories("liza.stage.magic.repositories.*")
+@EnableJpaRepositories("liza.stage.magic.repositories")
 @ComponentScan("liza.stage.magic.*")
 public class Main {
 
