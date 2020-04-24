@@ -1,6 +1,7 @@
 package liza.stage.magic.models.magiccards.dtos;
 
 import liza.stage.magic.models.magiccards.enums.Legality;
+
 import lombok.Data;
 
 @Data

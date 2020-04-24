@@ -1,6 +1,6 @@
-import {BorderColor, Color, Frame, FrameEffect, Game, Language, Layout, Legality, Relationship} from './enums';
-import {CardFace} from './card-face';
-import {Legalities} from './legalities';
+import {BorderColor, Color, Frame, FrameEffect, Game, Language, Layout, Relationship} from "./enums";
+import {CardFace} from "./card-face";
+import {Legalities} from "./legalities";
 
 export interface MagicCard {
 

@@ -1,6 +1,7 @@
 package liza.stage.magic.models.players.entities;
 
 import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
+
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

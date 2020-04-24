@@ -8,6 +8,7 @@ import liza.stage.magic.models.magiccards.enums.Frame;
 import liza.stage.magic.models.magiccards.json.CardFaceJson;
 import liza.stage.magic.models.magiccards.json.MagicCardJson;
 import liza.stage.magic.models.magiccards.json.RelatedCardJson;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -46,8 +47,7 @@ public abstract class MagicCardImportMapper {
         List<Color> colors = new ArrayList<>();
         if (colorsJson != null) {
             for (String colorJson : colorsJson) {
-                Color color = Color.fromString(colorJson);
-                colors.add(color);
+                colors.add(Color.fromString(colorJson));
             }
         }
         return colors;
@@ -58,8 +58,7 @@ public abstract class MagicCardImportMapper {
         List<CardFaceEntity> cardFaceEntities = new ArrayList<>();
         if (cardFacesJson != null) {
             for (CardFaceJson cardFaceJson : cardFacesJson) {
-                CardFaceEntity cardFaceEntity = cardFaceImportMapper.map(cardFaceJson);
-                cardFaceEntities.add(cardFaceEntity);
+                cardFaceEntities.add(cardFaceImportMapper.map(cardFaceJson));
             }
         }
         return cardFaceEntities;
@@ -71,8 +70,7 @@ public abstract class MagicCardImportMapper {
         List<RelatedCardEntity> relatedCardEntities = new ArrayList<>();
         if (relatedCardsJson != null) {
             for (RelatedCardJson relatedCardJson : relatedCardsJson) {
-                RelatedCardEntity relatedCardEntity = relatedCardImportMapper.map(relatedCardJson);
-                relatedCardEntities.add(relatedCardEntity);
+                relatedCardEntities.add(relatedCardImportMapper.map(relatedCardJson));
             }
         }
         return relatedCardEntities;

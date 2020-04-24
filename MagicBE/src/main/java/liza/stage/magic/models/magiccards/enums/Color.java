@@ -17,8 +17,10 @@ public enum Color {
     }
 
     public static Color fromString(final String code) {
-        return Stream.of(Color.values()).filter(value -> value.code.equals(code))
-                .findAny().orElseThrow(() -> new IllegalArgumentException("The Color with code " + code + " does not exist"));
+        return Stream.of(Color.values())
+                .filter(value -> value.code.equals(code))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("The Color with code " + code + " does not exist"));
     }
 
 }

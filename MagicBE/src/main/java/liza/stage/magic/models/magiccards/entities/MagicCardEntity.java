@@ -1,6 +1,7 @@
 package liza.stage.magic.models.magiccards.entities;
 
 import liza.stage.magic.models.magiccards.enums.*;
+
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -14,10 +15,6 @@ import java.util.List;
 @Table(name = "magiccard")
 public class MagicCardEntity {
     /////////// Core
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
-
     @Id
     private String scryfallId;
     @Column(nullable = false)

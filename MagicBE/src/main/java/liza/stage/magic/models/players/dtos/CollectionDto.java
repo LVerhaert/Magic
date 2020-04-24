@@ -1,6 +1,7 @@
 package liza.stage.magic.models.players.dtos;
 
 import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
+
 import lombok.Data;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

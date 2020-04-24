@@ -7,8 +7,7 @@ public enum Frame {
     y1997("1997"),
     y2003("2003"),
     y2015("2015"),
-    future("future"),
-    ;
+    future("future");
 
     private final String name;
 

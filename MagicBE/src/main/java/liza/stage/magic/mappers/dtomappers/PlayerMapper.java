@@ -1,7 +1,8 @@
-package liza.stage.magic.mappers.players;
+package liza.stage.magic.mappers.dtomappers;
 
 import liza.stage.magic.models.players.dtos.PlayerDto;
 import liza.stage.magic.models.players.entities.PlayerEntity;
+
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {CollectionMapper.class})

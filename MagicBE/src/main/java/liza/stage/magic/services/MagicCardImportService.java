@@ -1,11 +1,12 @@
 package liza.stage.magic.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import liza.stage.magic.mappers.importmappers.MagicCardImportMapper;
 import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
 import liza.stage.magic.models.magiccards.json.MagicCardJson;
-import liza.stage.magic.repositories.MagicCardEntitiesRepository;
+import liza.stage.magic.repositories.MagicCardRepository;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MagicCardImportService {
-    private final MagicCardEntitiesRepository magicCardEntitiesRepository;
+    private final MagicCardRepository magicCardRepository;
     private final MagicCardImportMapper magicCardImportMapper;
     private List<MagicCardJson> magicCardJsonList;
 
@@ -25,7 +26,8 @@ public class MagicCardImportService {
         ObjectMapper objectMapper = new ObjectMapper();
         magicCardJsonList = null;
         try {
-            magicCardJsonList = objectMapper.readValue(new File("src/main/resources/scryfall-oracle-cards.json"), new TypeReference<List<MagicCardJson>>() {
+            magicCardJsonList = objectMapper.readValue(new File("src/main/resources/scryfall-oracle-cards.json"),
+                    new TypeReference<List<MagicCardJson>>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,7 +39,8 @@ public class MagicCardImportService {
         ObjectMapper objectMapper = new ObjectMapper();
         magicCardJsonList = null;
         try {
-            magicCardJsonList = objectMapper.readValue(new File("src/main/resources/scryfall-oracle-cards-light.json"), new TypeReference<List<MagicCardJson>>() {
+            magicCardJsonList = objectMapper.readValue(new File("src/main/resources/scryfall-oracle-cards-light.json"),
+                    new TypeReference<List<MagicCardJson>>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +61,7 @@ public class MagicCardImportService {
 
     public void save(MagicCardJson magicCardJson) {
         MagicCardEntity magicCardEntity = magicCardImportMapper.map(magicCardJson);
-        magicCardEntitiesRepository.save(magicCardEntity);
+        magicCardRepository.save(magicCardEntity);
     }
 
 
@@ -67,7 +70,7 @@ public class MagicCardImportService {
     }
 
     public long getListSize() {
-        return magicCardEntitiesRepository.count();
+        return magicCardRepository.count();
     }
 
 }

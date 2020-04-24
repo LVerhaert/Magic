@@ -3,6 +3,7 @@ package liza.stage.magic.mappers.importmappers;
 import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
 import liza.stage.magic.models.magiccards.enums.Color;
 import liza.stage.magic.models.magiccards.json.CardFaceJson;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -22,8 +23,7 @@ public abstract class CardFaceImportMapper {
         List<Color> colors = new ArrayList<>();
         if (colorsJson != null) {
             for (String colorJson : colorsJson) {
-                Color color = Color.fromString(colorJson);
-                colors.add(color);
+                colors.add(Color.fromString(colorJson));
             }
         }
         return colors;

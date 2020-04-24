@@ -1,13 +1,11 @@
 package liza.stage.magic.models.magiccards.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class MagicCardJson {
     @JsonProperty("id")
     private String idString;
@@ -68,6 +66,10 @@ public class MagicCardJson {
     private long mtgoId;
     @JsonProperty("multiverse_ids")
     private List<Long> multiverseIds;
+    @JsonProperty("printed_name")
+    private String printedName;
+    @JsonProperty("flavor_name")
+    private String flavorName;
     private String name;
     private Boolean nonfoil;
     private String object;
@@ -111,6 +113,8 @@ public class MagicCardJson {
     private long tcgplayerId;
     private Boolean textless;
     private String toughness;
+    @JsonProperty("printed_type_line")
+    private String printedTypeLine;
     @JsonProperty("type_line")
     private String typeLine;
     private String uri;

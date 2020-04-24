@@ -1,6 +1,7 @@
 package liza.stage.magic.models.magiccards.entities;
 
 import liza.stage.magic.models.magiccards.enums.Relationship;
+
 import lombok.Data;
 
 import javax.persistence.*;
