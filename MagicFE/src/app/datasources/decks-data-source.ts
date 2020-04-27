@@ -1,9 +1,12 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {catchError, finalize} from "rxjs/operators";
-import {PlayerService} from "../services/player.service";
-import {Deck} from "../model/deck";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, finalize} from 'rxjs/operators';
+import {PlayerService} from '../services/player.service';
+import {Deck} from '../model/deck';
 
+/*
+Provides data for the player's decks list
+ */
 export class DecksDataSource extends DataSource<Deck> {
   private decksSubject = new BehaviorSubject<Deck[]>([]);
 
@@ -27,6 +30,9 @@ export class DecksDataSource extends DataSource<Deck> {
     this.countSubject.complete();
   }
 
+  /*
+  Load decks of player with id playerId, one page
+   */
   loadDecks(pageIndex: number, pageSize: number, playerId: number) {
     this.loadingSubject.next(true);
     this.playerService.getDecksOnePage(pageIndex, pageSize, playerId)

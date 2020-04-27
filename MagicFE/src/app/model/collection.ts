@@ -1,4 +1,4 @@
-import {MagicCard} from "./magiccard";
+import {MagicCard} from './magiccard';
 
 export interface Collection {
   id: number;

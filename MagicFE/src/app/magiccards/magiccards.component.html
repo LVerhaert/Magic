@@ -1,8 +1,10 @@
-<h2>All Magic Cards</h2>
-<div class="spinner-container" *ngIf="dataSource.loading$ | async">
-  <mat-spinner></mat-spinner>
-</div>
-<div>
+<!--suitable title for this page-->
+<h2 *ngIf="playerId == null && deckId == null">All Magic Cards</h2>
+<h2 *ngIf="playerId != null && deckId == null">{{player.name}}'s Collection</h2>
+<h2 *ngIf="playerId != null && deckId != null">{{player.name}}'s {{deck.deckName}}</h2>
+
+<div class="mat-elevation-z8">
+  <!--  table with pictures, names and types of the cards-->
   <table [dataSource]="dataSource" mat-table>
     <ng-container matColumnDef="image" sticky>
       <th *matHeaderCellDef mat-header-cell>Image</th>
@@ -21,17 +23,21 @@
       <td *matCellDef="let magicCard" mat-cell>{{magicCard.name}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="id">
-      <th *matHeaderCellDef mat-header-cell>ID</th>
-      <td *matCellDef="let magicCard" mat-cell>{{magicCard.scryfallId}}</td>
-    </ng-container>
-
     <tr *matHeaderRowDef="displayedColumns; sticky : true" mat-header-row></tr>
-    <tr *matRowDef="let magicCard; columns: displayedColumns;" mat-row routerLink="/magiccard/{{magicCard.scryfallId}}"></tr>
+    <!--    make the table row link to a card detail page-->
+    <tr *matRowDef="let magicCard; columns: displayedColumns;" mat-row
+        routerLink="/magiccard/{{magicCard.scryfallId}}"></tr>
   </table>
 
+  <!--  spinner that disappears when data is loaded-->
+  <div *ngIf="dataSource.loading$ | async" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!--  paginator-->
   <mat-paginator [pageSizeOptions]="[20, 100, 200]"
-                   showFirstLastButtons>
+                 showFirstLastButtons>
   </mat-paginator>
 </div>
+
 

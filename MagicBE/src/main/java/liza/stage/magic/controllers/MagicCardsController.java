@@ -2,7 +2,7 @@ package liza.stage.magic.controllers;
 
 import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
 import liza.stage.magic.models.magiccards.enums.Relationship;
-import liza.stage.magic.services.MagicCardService;
+import liza.stage.magic.services.*;
 import liza.stage.magic.services.OnePageResult;
 
 import lombok.RequiredArgsConstructor;

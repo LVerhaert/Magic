@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+.mat-elevation-z8 {
+  margin: 10px;
+}
+
 .mat-row {
   height: auto;
 }
@@ -12,4 +16,8 @@ table {
 
 .mat-header-cell {
   padding: 0 10px 0 10px;
+}
+
+.spinner-container {
+  padding: 10px;
 }

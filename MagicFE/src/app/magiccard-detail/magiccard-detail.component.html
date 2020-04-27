@@ -1,54 +1,51 @@
-
 <div *ngIf="magicCard">
-    <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
-        <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>
-        <mat-card-subtitle>{{magicCard.cardFaces[0].typeLine}}</mat-card-subtitle>
-      <mat-card-content>
-        <img mat-card-image src="{{magicCard.cardFaces[0].largeImageUri}}" alt="Card Image">
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="magic-card" *ngIf="magicCard.cardFaces.length > 0">
-        <mat-card-title>{{magicCard.cardFaces[1].name}}</mat-card-title>
-        <mat-card-subtitle>{{magicCard.cardFaces[1].typeLine}}</mat-card-subtitle>
-      <mat-card-content>
-        <img mat-card-image src="{{magicCard.cardFaces[1].largeImageUri}}" alt="Card Image">
-      </mat-card-content>
-    </mat-card>
+  <h2>{{magicCard.name}} Details</h2>
+  <!--  if it's a two-sided card, make one element for each side-->
+  <mat-card *ngIf="magicCard.cardFaces.length > 0" class="mat-elevation-z8">
+    <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>
+    <mat-card-subtitle>{{magicCard.cardFaces[0].typeLine}}</mat-card-subtitle>
+    <mat-card-content>
+      <img alt="Card image side 1" mat-card-image src="{{magicCard.cardFaces[0].largeImageUri}}">
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="magicCard.cardFaces.length > 0" class="mat-elevation-z8">
+    <mat-card-title>{{magicCard.cardFaces[1].name}}</mat-card-title>
+    <mat-card-subtitle>{{magicCard.cardFaces[1].typeLine}}</mat-card-subtitle>
+    <mat-card-content>
+      <img alt="Card image side 2" mat-card-image src="{{magicCard.cardFaces[1].largeImageUri}}">
+    </mat-card-content>
+  </mat-card>
 
 
-    <mat-card class="magic-card" *ngIf="magicCard.cardFaces == null || magicCard.cardFaces.length == 0">
-      <mat-card-title>{{magicCard.name}}</mat-card-title>
-      <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>
-      <mat-card-content>
-        <img mat-card-image src="{{magicCard.largeImageUri}}" alt="Card Image">
-      </mat-card-content>
-    </mat-card>
+  <!--  if it's a one-sided card, make one element-->
+  <mat-card *ngIf="magicCard.cardFaces == null || magicCard.cardFaces.length == 0" class="mat-elevation-z8">
+    <mat-card-title>{{magicCard.name}}</mat-card-title>
+    <mat-card-subtitle>{{magicCard.typeLine}}</mat-card-subtitle>
+    <mat-card-content>
+      <img alt="Card Image" mat-card-image src="{{magicCard.largeImageUri}}">
+    </mat-card-content>
+  </mat-card>
 
-    <mat-card class="magic-card">
-      <mat-card-title>Legalities</mat-card-title>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item *ngFor="let detail of legalities">
-            <h2 mat-line>{{detail.name}}</h2>
-            <p mat-line>{{detail.value}}</p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+  <!--  make a list of legalities-->
+  <mat-card class="mat-elevation-z8">
+    <mat-card-title>Legalities</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let detail of legalities">
+        <h2 mat-line>{{detail.name}}</h2>
+        <p mat-line>{{detail.value}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
 
-    <mat-card class="magic-card" *ngIf="magicCard.games.length > 0">
-      <mat-card-title>Games</mat-card-title>
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item *ngFor="let game of magicCard.games">
-            <p mat-line>{{game.toString()}}</p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+  <!--  if there's information about this, make a list of game modes-->
+  <mat-card *ngIf="magicCard.games.length > 0" class="mat-elevation-z8">
+    <mat-card-title>Games</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let game of magicCard.games">
+        <p mat-line>{{game.toString()}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
 </div>
-
-<button mat-raised-button color="primary" (click)="goBack()">Back</button>
-
 
 

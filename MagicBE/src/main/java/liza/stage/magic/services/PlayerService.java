@@ -205,8 +205,9 @@ public class PlayerService {
 
     ////////// Paging
     public OnePageResult<MagicCardDto> findDeckCardsPage(int playerId, int deckId, Pageable pageable) {
-        DeckDto deck = findDeck(playerId, deckId);
-        List<MagicCardDto> magicCards = deck.getMagicCardsPaged(pageable);
+        DeckEntity deck = findDeckEntityById(deckId);
+        List<MagicCardEntity> magicCardEntities = deck.getMagicCardsPaged(pageable);
+        List<MagicCardDto> magicCards = magicCardService.entityToDto(magicCardEntities);
         int size = deck.getMagicCards().size();
         return new OnePageResult<>(magicCards, size);
     }

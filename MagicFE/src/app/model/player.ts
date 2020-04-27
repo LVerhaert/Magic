@@ -1,5 +1,5 @@
-import {MainCollection} from "./main-collection";
-import {Deck} from "./deck";
+import {MainCollection} from './main-collection';
+import {Deck} from './deck';
 
 export interface Player {
   id: number;

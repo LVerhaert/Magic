@@ -98,8 +98,8 @@ export enum Game {
 }
 
 export enum Legality {
-  legal = "legal",
-  not_legal = "not legal",
-  restricted = "restricted",
-  banned = "banned"
+  legal = 'legal',
+  not_legal = 'not legal',
+  restricted = 'restricted',
+  banned = 'banned'
 }

@@ -1,4 +1,4 @@
-import {Collection} from "./collection";
+import {Collection} from './collection';
 
 export interface MainCollection extends Collection {
 

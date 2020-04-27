@@ -1,4 +1,4 @@
-import {Color} from "./enums";
+import {Color} from './enums';
 
 export interface CardFace {
   id: number;

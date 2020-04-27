@@ -1,4 +1,4 @@
-import {Legality} from "./enums";
+import {Legality} from './enums';
 
 export interface Legalities {
   brawl: Legality;

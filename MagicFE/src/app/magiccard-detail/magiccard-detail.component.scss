@@ -1,6 +1,14 @@
 
-.magic-card {
-  width: 300px;
+.mat-elevation-z8 {
   display: inline-grid;
   align-items: stretch;
+  margin: 10px;
+}
+
+.mat-card-image {
+  width: 290px;
+}
+
+.mat-card-content {
+  padding: 10px;
 }

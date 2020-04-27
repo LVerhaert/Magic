@@ -1,9 +1,12 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import {Player} from "../model/player";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {catchError, finalize} from "rxjs/operators";
-import {PlayerService} from "../services/player.service";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
+import {Player} from '../model/player';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, finalize} from 'rxjs/operators';
+import {PlayerService} from '../services/player.service';
 
+/*
+Provides data for the players list
+ */
 export class PlayersDataSource extends DataSource<Player> {
   private playersSubject = new BehaviorSubject<Player[]>([]);
 
@@ -27,6 +30,9 @@ export class PlayersDataSource extends DataSource<Player> {
     this.countSubject.complete();
   }
 
+  /*
+  Load players, one page
+   */
   loadPlayers(pageIndex: number, pageSize: number) {
     this.loadingSubject.next(true);
     this.playerService.getPlayersOnePage(pageIndex, pageSize)

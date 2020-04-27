@@ -1,9 +1,12 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import {MagicCard} from "../model/magiccard";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {MagicCardService} from "../services/magiccard.service";
-import {catchError, finalize} from "rxjs/operators";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
+import {MagicCard} from '../model/magiccard';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {MagicCardService} from '../services/magiccard.service';
+import {catchError, finalize} from 'rxjs/operators';
 
+/*
+Provides data for the Magic cards lists
+ */
 export class MagicCardsDataSource extends DataSource<MagicCard> {
   private magicCardsSubject = new BehaviorSubject<MagicCard[]>([]);
 
@@ -27,6 +30,9 @@ export class MagicCardsDataSource extends DataSource<MagicCard> {
     this.countSubject.complete();
   }
 
+  /*
+  Load cards, one page
+   */
   loadMagicCards(pageIndex: number, pageSize: number) {
     this.loadingSubject.next(true);
 
@@ -41,6 +47,9 @@ export class MagicCardsDataSource extends DataSource<MagicCard> {
     );
   }
 
+  /*
+  Load cards in main collection of player with id playerId, one page
+   */
   loadMagicCardsMainColl(pageIndex: number, pageSize: number, playerId: number) {
     this.loadingSubject.next(true);
 
@@ -55,6 +64,9 @@ export class MagicCardsDataSource extends DataSource<MagicCard> {
     );
   }
 
+  /*
+  Load cards of deck with id deckId of player with id playerId, one page
+   */
   loadMagicCardsDeck(pageIndex: number, pageSize: number, playerId: number, deckId: number) {
     this.loadingSubject.next(true);
 
@@ -63,8 +75,8 @@ export class MagicCardsDataSource extends DataSource<MagicCard> {
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))
       ).subscribe((pagingresult: any) => {
-        this.magicCardsSubject.next(pagingresult.data);
-        this.countSubject.next(pagingresult.total);
+      this.magicCardsSubject.next(pagingresult.data);
+      this.countSubject.next(pagingresult.total);
       }
     );
 

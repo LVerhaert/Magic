@@ -34,28 +34,6 @@ public class PlayerController {
         return playerService.findPlayer(Integer.parseInt(playerId));
     }
 
-    @GetMapping("/player/{playerid}/maincollection")
-    public MainCollectionDto getMainCollection(@PathVariable("playerid") String playerId) {
-        System.out.println("localhost:8080/player/" + playerId + "/maincollection called");
-        return playerService.findMainCollection(Integer.parseInt(playerId));
-    }
-
-    @GetMapping("/player/{playerid}/deck/{deckid}")
-    public DeckDto getDeck(@PathVariable("playerid") String playerId, @PathVariable("deckid") String deckId) {
-        System.out.println("localhost:8080/player/" + playerId + "/deck/" + deckId + " called");
-        return playerService.findDeck(Integer.parseInt(playerId), Integer.parseInt(deckId));
-    }
-
-    @GetMapping("/player/{playerid}/decks")
-    public OnePageResult<DeckDto> getDecks(@PathVariable("playerid") String playerId,
-                                           @RequestParam(required = false, defaultValue = "0") String pageIndex,
-                                           @RequestParam(required = false, defaultValue = "20") String pageSize) {
-        System.out.println("localhost:8080/player/" + playerId + "/decks?pageIndex="
-                + pageIndex + ", pageSize=" + pageSize + " called");
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageIndex), Integer.parseInt(pageSize));
-        return playerService.findDecksPage(Integer.parseInt(playerId), pageable);
-    }
-
     @GetMapping("/player/{playerid}/deck/{deckid}/magiccards")
     @ResponseBody
     public OnePageResult<MagicCardDto> getDeckCardsOnePage(@PathVariable("playerid") String playerId,

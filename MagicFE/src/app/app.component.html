@@ -1,5 +1,10 @@
 <mat-sidenav-container>
-<h1 class="mat-app-background">{{title}}</h1>
-<router-outlet class="mat-app-background"></router-outlet>
-<app-messages class="mat-app-background"></app-messages>
+  <!--  title of the web application-->
+  <h1>{{title}}</h1>
+  <!--  link to the correct page content-->
+  <router-outlet></router-outlet>
+  <!--  button that takes the user back to the previous page-->
+  <button (click)="goBack()" color="primary" mat-raised-button>Back</button>
+  <!--  messages logged by the message service-->
+  <app-messages></app-messages>
 </mat-sidenav-container>
