@@ -21,6 +21,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {PlayersComponent} from './players/players.component';
 import {PlayerDetailComponent} from './player-detail/player-detail.component';
 import {DecksComponent} from './decks/decks.component';
+import {MagiccardsSearchComponent} from './magiccards-search/magiccards-search.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {PlayersSearchComponent} from './players-search/players-search.component';
+import {DecksSearchComponent} from './decks-search/decks-search.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,9 @@ import {DecksComponent} from './decks/decks.component';
     PlayersComponent,
     PlayerDetailComponent,
     DecksComponent,
+    MagiccardsSearchComponent,
+    PlayersSearchComponent,
+    DecksSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +58,9 @@ import {DecksComponent} from './decks/decks.component';
     MatTableModule,
     MatTableModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

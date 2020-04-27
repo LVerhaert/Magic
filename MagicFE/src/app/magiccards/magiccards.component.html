@@ -9,7 +9,7 @@
     <ng-container matColumnDef="image" sticky>
       <th *matHeaderCellDef mat-header-cell>Image</th>
       <td *matCellDef="let magicCard" mat-cell>
-        <img [src]="magicCard.smallImageUri" class="mr-2" style="width: 50px">
+        <img [src]="magicCard.smallImageUri" style="width: 50px">
       </td>
     </ng-container>
 
@@ -40,4 +40,6 @@
   </mat-paginator>
 </div>
 
+<!--search for cards-->
+<app-magiccards-search></app-magiccards-search>
 
