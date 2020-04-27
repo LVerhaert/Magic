@@ -13,4 +13,6 @@ public interface MagicCardRepository extends JpaRepository<MagicCardEntity, Stri
     List<MagicCardEntity> findTop10ByNameContains(String nameContains);
 
     List<MagicCardEntity> findAllByScryfallIdIn(List<String> ids, Pageable pageable);
+
+    List<MagicCardEntity> findTop10ByScryfallIdInAndNameContainsIgnoreCase(List<String> ids, String nameContains);
 }

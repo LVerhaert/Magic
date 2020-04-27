@@ -1,10 +1,15 @@
 <mat-sidenav-container>
   <!--  title of the web application-->
-  <h1>{{title}}</h1>
+  <mat-toolbar color="primary">
+    <span>{{title}}</span>
+  </mat-toolbar>
+
   <!--  link to the correct page content-->
   <router-outlet></router-outlet>
   <!--  button that takes the user back to the previous page-->
   <button (click)="goBack()" color="primary" mat-raised-button>Back</button>
+
   <!--  messages logged by the message service-->
   <app-messages></app-messages>
+
 </mat-sidenav-container>

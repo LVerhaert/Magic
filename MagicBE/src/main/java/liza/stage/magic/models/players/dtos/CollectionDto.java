@@ -14,6 +14,7 @@ import java.util.List;
 public abstract class CollectionDto {
     private int id;
     private List<MagicCardDto> magicCards;
+    private List<String> magicCardIds;
 
     protected CollectionDto() {
         magicCards = new ArrayList<>();
@@ -30,4 +31,5 @@ public abstract class CollectionDto {
         List<MagicCardDto> subList = magicCards.subList(startIndex, endIndex);
         return new PageImpl<>(subList, pageable, magicCards.size()).getContent();
     }
+
 }

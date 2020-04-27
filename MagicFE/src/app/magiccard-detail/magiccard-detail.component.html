@@ -1,5 +1,8 @@
 <div *ngIf="magicCard">
-  <h2>{{magicCard.name}} Details</h2>
+  <div style="margin-left: 20px">
+    <h2>Details of {{magicCard.name}}</h2>
+  </div>
+
   <!--  if it's a two-sided card, make one element for each side-->
   <mat-card *ngIf="magicCard.cardFaces.length > 0" class="mat-elevation-z8">
     <mat-card-title>{{magicCard.cardFaces[0].name}}</mat-card-title>

@@ -1,7 +1,9 @@
-<!--suitable title for this page-->
-<h2 *ngIf="playerId == null && deckId == null">All Magic Cards</h2>
-<h2 *ngIf="playerId != null && deckId == null">{{player.name}}'s Collection</h2>
-<h2 *ngIf="playerId != null && deckId != null">{{player.name}}'s {{deck.deckName}}</h2>
+<div style="margin-left: 20px">
+  <!--suitable title for this page-->
+  <h2 *ngIf="playerId == null && deckId == null">All magic cards</h2>
+  <h2 *ngIf="playerId != null && deckId == null">{{player.name}}'s collection</h2>
+  <h2 *ngIf="playerId != null && deckId != null">{{player.name}}'s deck: {{deck.deckName}}</h2>
+</div>
 
 <div class="mat-elevation-z8">
   <!--  table with pictures, names and types of the cards-->

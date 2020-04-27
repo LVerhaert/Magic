@@ -92,6 +92,11 @@ public class MagicCardService {
         return entityToDto(magicCards);
     }
 
+    public List<MagicCardDto> searchSpecificByName(List<String> ids, String term) {
+        List<MagicCardEntity> magicCards = magicCardRepository.findTop10ByScryfallIdInAndNameContainsIgnoreCase(ids, term);
+        return entityToDto(magicCards);
+    }
+
     /////////// Paging
     public OnePageResult<MagicCardDto> findCardsPage(Pageable pageable) {
         List<MagicCardEntity> magicCards = magicCardRepository.findAll(pageable).getContent();

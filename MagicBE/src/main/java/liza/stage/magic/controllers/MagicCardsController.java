@@ -2,6 +2,8 @@ package liza.stage.magic.controllers;
 
 import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
 import liza.stage.magic.models.magiccards.enums.Relationship;
+import liza.stage.magic.models.players.dtos.DeckDto;
+import liza.stage.magic.models.players.dtos.MainCollectionDto;
 import liza.stage.magic.services.*;
 import liza.stage.magic.services.OnePageResult;
 
@@ -20,6 +22,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 public class MagicCardsController {
     private final MagicCardService magicCardService;
+    private final PlayerService playerService;
 
     @GetMapping("/magiccards")
     @ResponseBody
@@ -44,12 +47,20 @@ public class MagicCardsController {
 
     @GetMapping("/magiccards/search")
     @ResponseBody
-    public List<MagicCardDto> searchMagicCard(@RequestParam(required = false) String name) {
-        System.out.println("localhost:8080/magiccards/search?name=" + name + " called");
-//        System.out.println("I tried this: \"" + name + "\"");
+    public List<MagicCardDto> searchMagicCard(@RequestParam(required = false) String name,
+                                              @RequestParam(required = false) String playerId,
+                                              @RequestParam(required = false) String deckId) {
+        System.out.println("localhost:8080/magiccards/search?name=" + name + "&playerId=" + playerId + "&deckId=" + deckId + " called");
         if (name == null) {
             return new ArrayList<>();
+        } else if (playerId == null) {
+            return magicCardService.searchByName(name);
+        } else if (deckId == null) {
+            MainCollectionDto mainCollection = playerService.findMainCollection(Integer.parseInt(playerId));
+            return magicCardService.searchSpecificByName(mainCollection.getMagicCardIds(), name);
+        } else {
+            DeckDto deck = playerService.findDeck(Integer.parseInt(playerId), Integer.parseInt(deckId));
+            return magicCardService.searchSpecificByName(deck.getMagicCardIds(), name);
         }
-        return magicCardService.searchByName(name);
     }
 }

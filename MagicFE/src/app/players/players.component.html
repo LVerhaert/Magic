@@ -1,4 +1,7 @@
-<h2>All Players</h2>
+<div style="margin-left: 20px">
+  <h2>All players</h2>
+</div>
+
 <div class="mat-elevation-z8">
   <!--  table with id's and names of players-->
   <table [dataSource]="dataSource" mat-table>
@@ -25,8 +28,8 @@
 
   <!--  paginator-->
   <mat-paginator [pageSizeOptions]="[20, 100, 200]"
-                 color="accent"
                  showFirstLastButtons>
   </mat-paginator>
+
 </div>
 

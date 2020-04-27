@@ -31,7 +31,7 @@ export class MagicCardService {
         .set('pageSize', pageSize.toString())
     })
       .pipe(
-        tap(_ => this.log('fetched magicCards  getMagicCards')),
+        tap(_ => this.log('fetched a page of all cards')),
         catchError(this.handleError<MagicCard[]>('getMagicCardsOnePage', [])));
   }
 
@@ -46,8 +46,8 @@ export class MagicCardService {
         .set('pageSize', pageSize.toString())
     })
       .pipe(
-        tap(_ => this.log('fetched magicCards getMagicCardsMainColl: ' + url)),
-        catchError(this.handleError<MagicCard[]>('getMagicCardsMainColl', [])));
+        tap(_ => this.log(`fetched a page of main collection (playerId=${playerId})`)),
+        catchError(this.handleError<MagicCard[]>('getMagicCardsMainCollOnePage', [])));
   }
 
   /*
@@ -61,8 +61,8 @@ export class MagicCardService {
         .set('pageSize', pageSize.toString())
     })
       .pipe(
-        tap(_ => this.log('fetched magicCards getMagicCardsDeck: ' + url)),
-        catchError(this.handleError<MagicCard[]>('getMagicCardsOnePage', [])));
+        tap(_ => this.log(`fetched a page of deck (deckId=${deckId})`)),
+        catchError(this.handleError<MagicCard[]>('getMagicCardsDeckOnePage', [])));
   }
 
   /*
@@ -71,13 +71,13 @@ export class MagicCardService {
   getMagicCard(cardId: string): Observable<MagicCard> {
     const url = `${this.magicCardUrl}/${cardId}`;
     return this.http.get<MagicCard>(url).pipe(
-      tap(_ => this.log(`fetched magicCard id=${cardId}`)),
+      tap(_ => this.log(`fetched a card (id=${cardId})`)),
       catchError(this.handleError<MagicCard>(`getMagicCard id=${cardId}`))
     );
   }
 
   /*
-  Load cards with searchTerm as part of it's name
+  Search for cards with searchTerm as part of its name in all cards
    */
   searchMagicCards(searchTerm: string): Observable<MagicCard[]> {
     if (!searchTerm.trim()) {
@@ -88,9 +88,48 @@ export class MagicCardService {
         .set('name', searchTerm)
     }).pipe(
       tap(x => x.length ?
-        this.log(`found magicCards matching "${searchTerm}"`) :
-        this.log(`no magicCards matching "${searchTerm}"`)),
+        this.log(`found cards matching "${searchTerm}"`) :
+        this.log(`no cards matching "${searchTerm}"`)),
       catchError(this.handleError<MagicCard[]>('searchMagicCards', []))
+    );
+  }
+
+  /*
+  Search for cards with searchTerm as part of its name in player's main collection
+   */
+  searchMagicCardsMainColl(searchTerm: string, playerId: string): Observable<MagicCard[]> {
+    if (!searchTerm.trim()) {
+      return of([]);
+    }
+    return this.http.get<MagicCard[]>(this.magicCardsSearchUrl, {
+      params: new HttpParams()
+        .set('name', searchTerm)
+        .set('playerId', playerId)
+    }).pipe(
+      tap(x => x.length ?
+        this.log(`found cards matching "${searchTerm}" (playerId=${playerId})`) :
+        this.log(`no cards matching "${searchTerm}" (playerId=${playerId})`)),
+      catchError(this.handleError<MagicCard[]>('searchMagicCardsMainColl', []))
+    );
+  }
+
+  /*
+  Search for cards with searchTerm as part of its name in deck
+   */
+  searchMagicCardsDeck(searchTerm: string, playerId: string, deckId: string): Observable<MagicCard[]> {
+    if (!searchTerm.trim()) {
+      return of([]);
+    }
+    return this.http.get<MagicCard[]>(this.magicCardsSearchUrl, {
+      params: new HttpParams()
+        .set('name', searchTerm)
+        .set('playerId', playerId)
+        .set('deckId', deckId)
+    }).pipe(
+      tap(x => x.length ?
+        this.log(`found cards matching "${searchTerm}" (deckId=${deckId})`) :
+        this.log(`no cards matching "${searchTerm}" (deckId=${deckId})`)),
+      catchError(this.handleError<MagicCard[]>('searchMagicCardsDeck', []))
     );
   }
 

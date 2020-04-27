@@ -25,8 +25,9 @@ import {MagiccardsSearchComponent} from './magiccards-search/magiccards-search.c
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
-import {PlayersSearchComponent} from './players-search/players-search.component';
-import {DecksSearchComponent} from './decks-search/decks-search.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+// import {PlayersSearchComponent} from './players-search/players-search.component';
+// import {DecksSearchComponent} from './decks-search/decks-search.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import {DecksSearchComponent} from './decks-search/decks-search.component';
     PlayerDetailComponent,
     DecksComponent,
     MagiccardsSearchComponent,
-    PlayersSearchComponent,
-    DecksSearchComponent,
+    // PlayersSearchComponent,
+    // DecksSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +62,7 @@ import {DecksSearchComponent} from './decks-search/decks-search.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

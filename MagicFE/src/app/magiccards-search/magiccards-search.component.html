@@ -1,19 +1,25 @@
 <div class="mat-elevation-z8">
+<!--  the search field-->
   <mat-form-field>
     <mat-label>Search a card</mat-label>
+    <!--    reacts immediately to input-->
     <input #searchBox (input)="search(searchBox.value)" id="search-box" matInput placeholder="Enter a card's name"
            type="text">
+    <!--    to clear the search field and its results-->
     <button (click)="searchBox.value = ''; search(searchBox.value)" *ngIf="searchBox.value" aria-label="Clear"
             mat-button mat-icon-button matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
+  <!--  the result list-->
   <mat-nav-list>
+    <!--    name, type and smallimage, links to the details page-->
     <mat-list-item *ngFor="let magicCard of magicCards$ | async" routerLink="/magiccard/{{magicCard.scryfallId}}">
       <img [src]="magicCard.smallImageUri" class="mr-2" style="width: 40px">
       <div mat-line>{{magicCard.name}}</div>
       <div mat-line>{{magicCard.typeLine}}</div>
     </mat-list-item>
   </mat-nav-list>
+
 </div>

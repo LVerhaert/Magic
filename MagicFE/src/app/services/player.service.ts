@@ -30,7 +30,7 @@ export class PlayerService {
         .set('pageSize', pageSize.toString())
     })
       .pipe(
-        tap(_ => this.log('fetched players, index=' + pageIndex + ', size=' + pageSize + ', players=' + this.getPlayersOnePage(0, 20))),
+        tap(_ => this.log(`fetched players (index=${pageIndex}, size=${pageSize})`)),
         catchError(this.handleError<Player[]>('getPlayersOnePage', [])));
   }
 
@@ -40,7 +40,7 @@ export class PlayerService {
   getPlayer(playerId: number): Observable<Player> {
     const url = `${this.collectionsUrl}/${playerId}`;
     return this.http.get<Player>(url).pipe(
-      tap(_ => this.log(`fetched player id=${playerId}`)),
+      tap(_ => this.log(`fetched player (playerId=${playerId})`)),
       catchError(this.handleError<Player>(`getPlayer id=${playerId}`))
     );
   }
@@ -56,7 +56,7 @@ export class PlayerService {
         .set('pageSize', pageSize.toString())
     })
       .pipe(
-        tap(_ => this.log('fetched decks')),
+        tap(_ => this.log(`fetched decks (index=${pageIndex}, size=${pageSize})`)),
         catchError(this.handleError<Deck[]>('getDecksOnePage', [])));
   }
 
@@ -66,7 +66,7 @@ export class PlayerService {
   getDeck(playerId: number, deckId: number): Observable<Deck> {
     const url = `${this.collectionsUrl}/${playerId}/deck/${deckId}`;
     return this.http.get<Deck>(url).pipe(
-      tap(_ => this.log(`fetched player id=${playerId} deck id=${deckId}`)),
+      tap(_ => this.log(`fetched deck (playerId=${playerId}, deckId=${deckId})`)),
       catchError(this.handleError<Deck>(`getDeck id=${deckId}`))
     );
   }
