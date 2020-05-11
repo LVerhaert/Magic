@@ -1,23 +1,19 @@
 package liza.stage.magic.mappers.importmappers;
 
-import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
-import liza.stage.magic.models.magiccards.enums.Color;
-import liza.stage.magic.models.magiccards.json.CardFaceJson;
-
+import liza.stage.magic.models.magiccards.magiccardentities.CardFaceEntity;
+import liza.stage.magic.models.magiccards.magiccardjson.CardFaceJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class CardFaceImportMapper {
 
-    @Mapping(source = "colors", target = "colors", qualifiedByName = "toCFColors")
-    @Mapping(source = "colorIndicator", target = "colorIndicator", qualifiedByName = "toCFColors")
+    //    @Mapping(source = "colors", target = "colors", qualifiedByName = "toCFColors")
+//    @Mapping(source = "colorIndicator", target = "colorIndicator", qualifiedByName = "toCFColors")
+    @Mapping(source = "imageUris.png", target = "imageUris.large")
     public abstract CardFaceEntity map(CardFaceJson cardFaceJson);
 
+    /*
     @Named("toCFColors")
     List<Color> toCFColors(List<String> colorsJson) {
         List<Color> colors = new ArrayList<>();
@@ -28,4 +24,5 @@ public abstract class CardFaceImportMapper {
         }
         return colors;
     }
+     */
 }

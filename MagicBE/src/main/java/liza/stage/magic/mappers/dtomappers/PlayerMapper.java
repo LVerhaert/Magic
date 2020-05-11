@@ -1,20 +1,13 @@
 package liza.stage.magic.mappers.dtomappers;
 
-import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
-import liza.stage.magic.models.players.dtos.PlayerDto;
-import liza.stage.magic.models.players.entities.PlayerEntity;
-
+import liza.stage.magic.models.players.playerdtos.PlayerDto;
+import liza.stage.magic.models.players.playerentities.PlayerEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {CollectionMapper.class})
 public abstract class PlayerMapper {
-    public abstract PlayerDto toDto(PlayerEntity playerEntity);
+    public abstract PlayerDto map(PlayerEntity playerEntity);
 
-    public abstract PlayerEntity toEntity(PlayerDto playerDto);
+    public abstract PlayerEntity map(PlayerDto playerDto);
 
 }

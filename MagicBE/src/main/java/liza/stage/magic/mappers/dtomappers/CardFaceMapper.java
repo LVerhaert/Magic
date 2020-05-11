@@ -1,8 +1,7 @@
 package liza.stage.magic.mappers.dtomappers;
 
-import liza.stage.magic.models.magiccards.dtos.CardFaceDto;
-import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
-
+import liza.stage.magic.models.magiccards.magiccarddtos.CardFaceDto;
+import liza.stage.magic.models.magiccards.magiccardentities.CardFaceEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,11 +1,10 @@
 package liza.stage.magic.mappers.dtomappers;
 
-import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
-import liza.stage.magic.models.players.dtos.DeckDto;
-import liza.stage.magic.models.players.dtos.MainCollectionDto;
-import liza.stage.magic.models.players.entities.DeckEntity;
-import liza.stage.magic.models.players.entities.MainCollectionEntity;
-
+import liza.stage.magic.models.magiccards.magiccardentities.MagicCardEntity;
+import liza.stage.magic.models.players.playerdtos.DeckDto;
+import liza.stage.magic.models.players.playerdtos.MainCollectionDto;
+import liza.stage.magic.models.players.playerentities.DeckEntity;
+import liza.stage.magic.models.players.playerentities.MainCollectionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -17,14 +16,16 @@ import java.util.List;
 public abstract class CollectionMapper {
 
     @Mapping(source = "magicCards", target = "magicCardIds", qualifiedByName = "toMagicCardIds")
-    public abstract MainCollectionDto toDto(MainCollectionEntity mainCollectionEntity);
+//    @Mapping(source = "player", target = "player", ignore = true)
+    public abstract MainCollectionDto map(MainCollectionEntity mainCollectionEntity);
 
     @Mapping(source = "magicCards", target = "magicCardIds", qualifiedByName = "toMagicCardIds")
-    public abstract DeckDto toDto(DeckEntity deckEntity);
+//    @Mapping(source = "player", target = "player", ignore = true)
+    public abstract DeckDto map(DeckEntity deckEntity);
 
-    public abstract MainCollectionEntity toEntity(MainCollectionDto mainCollectionDto);
+    public abstract MainCollectionEntity map(MainCollectionDto mainCollectionDto);
 
-    public abstract DeckEntity toEntity(DeckDto deckDto);
+    public abstract DeckEntity map(DeckDto deckDto);
 
     @Named("toMagicCardIds")
     List<String> toMagicCardIds(List<MagicCardEntity> magicCards) {

@@ -1,27 +1,25 @@
 package liza.stage.magic.services;
 
 import liza.stage.magic.mappers.dtomappers.MagicCardMapper;
-import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
-import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
-import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
-import liza.stage.magic.models.magiccards.enums.Relationship;
+import liza.stage.magic.models.magiccards.magiccarddtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.magiccardentities.MagicCardEntity;
 import liza.stage.magic.repositories.MagicCardRepository;
-import liza.stage.magic.repositories.RelatedCardRepository;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+//import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
+//import liza.stage.magic.models.magiccards.enums.Relationship;
+//import liza.stage.magic.repositories.RelatedCardRepository;
 
 @Service
 @RequiredArgsConstructor
 public class MagicCardService {
     private final MagicCardRepository magicCardRepository;
-    private final RelatedCardRepository relatedCardRepository;
+    //    private final RelatedCardRepository relatedCardRepository;
     private final MagicCardMapper magicCardMapper;
 
     ////////////// Entities
@@ -47,7 +45,7 @@ public class MagicCardService {
     }
 
     private MagicCardDto entityToDto(MagicCardEntity magicCardEntity) {
-        MagicCardDto magicCardDto = magicCardMapper.entityToDto(magicCardEntity);
+        MagicCardDto magicCardDto = magicCardMapper.map(magicCardEntity);
         if (magicCardDto.getCardFaces().size() > 0) {
             magicCardDto.setSmallImageUri(magicCardDto.getCardFaces().get(0).getSmallImageUri());
             magicCardDto.setLargeImageUri(magicCardDto.getCardFaces().get(0).getLargeImageUri());
@@ -55,55 +53,41 @@ public class MagicCardService {
         return magicCardDto;
     }
 
-    //////////////// DTO -> Entity
-    private MagicCardEntity dtoToEntity(MagicCardDto magicCardDto) {
-        MagicCardEntity magicCardEntity = magicCardMapper.dtoToEntity(magicCardDto);
-        List<RelatedCardEntity> relatedCardEntities = new ArrayList<>();
-        if (magicCardDto.getRelatedCards() != null) {
-            for (Map.Entry<String, Relationship> relatedCardDto : magicCardDto.getRelatedCards().entrySet()) {
-                String relatedCardString = relatedCardDto.getKey();
-                relatedCardEntities.add(relatedCardRepository.findByScryfallId(relatedCardString));
-            }
-            magicCardEntity.setRelatedCards(relatedCardEntities);
-        }
-        return magicCardEntity;
-    }
-
     ////////////// DTO
-    public MagicCardDto findById(String id) {
+    public MagicCardDto findCardById(String id) {
         return entityToDto(magicCardRepository.findById(id).orElse(null));
     }
 
-    public Map<MagicCardDto, Relationship> findAllRelatedTo(String id) {
-        MagicCardDto magicCard = findById(id);
-        Map<String, Relationship> relatedCards = magicCard.getRelatedCards();
-        Map<MagicCardDto, Relationship> related = new HashMap<>();
-        if (relatedCards != null) {
-            for (Map.Entry<String, Relationship> relatedCard : relatedCards.entrySet()) {
-                related.put(findById(relatedCard.getKey()), relatedCard.getValue());
-            }
-        }
-        return related;
-    }
+//    public Map<MagicCardDto, Relationship> findAllRelatedTo(String id) {
+//        MagicCardDto magicCard = findById(id);
+//        Map<String, Relationship> relatedCards = magicCard.getRelatedCards();
+//        Map<MagicCardDto, Relationship> related = new HashMap<>();
+//        if (relatedCards != null) {
+//            for (Map.Entry<String, Relationship> relatedCard : relatedCards.entrySet()) {
+//                related.put(findById(relatedCard.getKey()), relatedCard.getValue());
+//            }
+//        }
+//        return related;
+//    }
 
     ////////////// Search
     public List<MagicCardDto> searchByName(String term) {
-        List<MagicCardEntity> magicCards = magicCardRepository.findTop10ByNameContains(term);
+        List<MagicCardEntity> magicCards = magicCardRepository.findTop10ByNameContainsIgnoreCase(term);
         return entityToDto(magicCards);
     }
 
-    public List<MagicCardDto> searchSpecificByName(List<String> ids, String term) {
+    public List<MagicCardDto> searchListByName(List<String> ids, String term) {
         List<MagicCardEntity> magicCards = magicCardRepository.findTop10ByScryfallIdInAndNameContainsIgnoreCase(ids, term);
         return entityToDto(magicCards);
     }
 
     /////////// Paging
-    public OnePageResult<MagicCardDto> findCardsPage(Pageable pageable) {
+    public OnePageResult<MagicCardDto> findCards(Pageable pageable) {
         List<MagicCardEntity> magicCards = magicCardRepository.findAll(pageable).getContent();
         return new OnePageResult<>(entityToDto(magicCards), magicCardRepository.count());
     }
 
-    public OnePageResult<MagicCardEntity> findCardsPageEntity(Pageable pageable) {
+    public OnePageResult<MagicCardEntity> findCardsEntity(Pageable pageable) {
         List<MagicCardEntity> magicCards = magicCardRepository.findAll(pageable).getContent();
         return new OnePageResult<>(magicCards, magicCardRepository.count());
     }

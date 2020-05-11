@@ -9,9 +9,12 @@
       <ng-container matColumnDef="maincollection">
         <td *matCellDef="let mainCollection" mat-cell>{{mainCollection.data}}</td>
       </ng-container>
+      <ng-container matColumnDef="size">
+        <td *matCellDef="let mainCollection" mat-cell>{{player.mainCollection.magicCardIds.length}} card(s)</td>
+      </ng-container>
 
       <!--    make the 'table row' link to the player's main collection-->
-      <tr *matRowDef="let mainCollection; columns: ['maincollection'];" mat-row
+      <tr *matRowDef="let mainCollection; columns: ['maincollection','size'];" mat-row
           routerLink="/player/{{player.id}}/maincollection"></tr>
     </table>
   </div>

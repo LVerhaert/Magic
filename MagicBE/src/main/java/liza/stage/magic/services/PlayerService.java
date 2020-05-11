@@ -2,12 +2,17 @@ package liza.stage.magic.services;
 
 import liza.stage.magic.mappers.dtomappers.CollectionMapper;
 import liza.stage.magic.mappers.dtomappers.PlayerMapper;
-import liza.stage.magic.models.magiccards.dtos.MagicCardDto;
-import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
-import liza.stage.magic.models.players.dtos.*;
-import liza.stage.magic.models.players.entities.*;
-import liza.stage.magic.repositories.*;
-
+import liza.stage.magic.models.magiccards.magiccarddtos.MagicCardDto;
+import liza.stage.magic.models.magiccards.magiccardentities.MagicCardEntity;
+import liza.stage.magic.models.players.playerdtos.DeckDto;
+import liza.stage.magic.models.players.playerdtos.MainCollectionDto;
+import liza.stage.magic.models.players.playerdtos.PlayerDto;
+import liza.stage.magic.models.players.playerentities.DeckEntity;
+import liza.stage.magic.models.players.playerentities.MainCollectionEntity;
+import liza.stage.magic.models.players.playerentities.PlayerEntity;
+import liza.stage.magic.repositories.playerrepositories.DeckRepository;
+import liza.stage.magic.repositories.playerrepositories.MainCollectionRepository;
+import liza.stage.magic.repositories.playerrepositories.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,12 +33,23 @@ public class PlayerService {
 
     /////////////// Find
     ///// Entities
-    public PlayerEntity findPlayerEntityById(int playerId) {
+    private PlayerEntity findPlayerEntityById(int playerId) {
         return playerRepository.findById(playerId).orElse(null);
     }
 
-    public DeckEntity findDeckEntityById(int deckId) {
+    private DeckEntity findDeckEntityById(int deckId) {
         return deckRepository.findById(deckId).orElse(null);
+    }
+
+    private DeckEntity findDeckEntity(int playerId, int deckId) {
+        DeckEntity deckEntity = deckRepository.findById(deckId).orElse(null);
+        PlayerEntity playerEntity = playerRepository.findById(playerId).orElse(null);
+        if (deckEntity != null && playerEntity != null) {
+            if (playerEntity.getDecks().contains(deckEntity)) {
+                return deckEntity;
+            }
+        }
+        return null;
     }
 
     private MainCollectionEntity findMainCollectionEntityById(int mainCollectionId) {
@@ -44,59 +60,87 @@ public class PlayerService {
         return magicCardService.findEntityById(cardId);
     }
 
+    private List<MagicCardEntity> findMagicCardEntitiesById(List<String> cardIds, Pageable pageable) {
+        return magicCardService.findEntitiesById(cardIds, pageable);
+    }
+
     private List<MagicCardEntity> findMagicCardEntitiesById(List<String> cardIds) {
         return magicCardService.findEntitiesById(cardIds);
     }
 
     ////// DTO's
     public PlayerDto findPlayer(int playerId) {
-        return playerMapper.toDto(findPlayerEntityById(playerId));
+        return playerMapper.map(findPlayerEntityById(playerId));
     }
 
-
-    public List<PlayerDto> findPlayers() {
-        List<PlayerDto> players = new ArrayList<>();
-        for (PlayerEntity player : playerRepository.findAll()) {
-            players.add(playerMapper.toDto(player));
-        }
-        return players;
-    }
-
-    public List<DeckDto> findDecks(int playerId) {
-        PlayerEntity playerEntity = findPlayerEntityById(playerId);
-        ArrayList<DeckDto> deckDtos = new ArrayList<>();
-        for (DeckEntity deckEntity : playerEntity.getDecks()) {
-            deckDtos.add(collectionMapper.toDto(deckEntity));
-        }
-        return deckDtos;
-    }
-
-    public DeckDto findDeck(int playerId, int deckId) {
-        PlayerEntity playerEntity = findPlayerEntityById(playerId);
-        DeckEntity deckEntity = findDeckEntityById(deckId);
-        if (playerEntity.getDecks().contains(deckEntity)) {
-            return collectionMapper.toDto(deckEntity);
-        }
-        return null;
+    public OnePageResult<PlayerDto> findPlayers(Pageable pageable) {
+        List<PlayerEntity> players = playerRepository.findAll(pageable).getContent();
+        return new OnePageResult<>(this.playerEntitiesToDtos(players), playerRepository.count());
     }
 
     public MainCollectionDto findMainCollection(int playerId) {
         PlayerEntity playerEntity = findPlayerEntityById(playerId);
-        return collectionMapper.toDto(playerEntity.getMainCollection());
+        return collectionMapper.map(playerEntity.getMainCollection());
     }
 
+    public DeckDto findDeck(int playerId, int deckId) {
+        return collectionMapper.map(findDeckEntity(playerId, deckId));
+    }
+
+    public OnePageResult<DeckDto> findDecks(int playerId, Pageable pageable) {
+        PlayerEntity player = playerRepository.findById(playerId).orElse(null);
+        List<DeckDto> decks = new ArrayList<>();
+        if (player != null) {
+            decks = deckEntitiesToDtos(deckRepository.findByPlayer(player, pageable));
+        }
+        return new OnePageResult<>(decks, decks.size());
+    }
+
+    ////////// Entity -> DTO
+    private List<PlayerDto> playerEntitiesToDtos(List<PlayerEntity> playerEntities) {
+        List<PlayerDto> players = new ArrayList<>();
+        for (PlayerEntity playerEntity : playerEntities) {
+            players.add(playerMapper.map(playerEntity));
+        }
+        return players;
+    }
+
+    private List<DeckDto> deckEntitiesToDtos(List<DeckEntity> deckEntities) {
+        List<DeckDto> decks = new ArrayList<>();
+        for (DeckEntity deckEntity : deckEntities) {
+            decks.add(collectionMapper.map(deckEntity));
+        }
+        return decks;
+    }
+
+    ////////// MagicCards
+    public OnePageResult<MagicCardDto> findDeckCards(int playerId, int deckId, Pageable pageable) {
+        List<String> magicCardIds = findDeck(playerId, deckId).getMagicCardIds();
+        List<MagicCardEntity> magicCardEntities = findMagicCardEntitiesById(magicCardIds, pageable);
+        List<MagicCardDto> magicCards = magicCardService.entityToDto(magicCardEntities);
+        int size = magicCardIds.size();
+        return new OnePageResult<>(magicCards, size);
+    }
+
+    public OnePageResult<MagicCardDto> findMainCollectionCards(int playerId, Pageable pageable) {
+        List<String> magicCardIds = findMainCollection(playerId).getMagicCardIds();
+        List<MagicCardEntity> magicCardEntities = findMagicCardEntitiesById(magicCardIds, pageable);
+        List<MagicCardDto> magicCards = magicCardService.entityToDto(magicCardEntities);
+        int size = magicCardIds.size();
+        return new OnePageResult<>(magicCards, size);
+    }
 
     /////////// Operations
     ///// Add
     public void addPlayer(String name) {
         // create player
-        PlayerEntity newPlayer = playerMapper.toEntity(new PlayerDto(name));
+        PlayerEntity newPlayer = playerMapper.map(new PlayerDto(name));
         playerRepository.save(newPlayer);
     }
 
     public void addDeck(int playerId, String name) {
         // create deck
-        DeckEntity newDeck = collectionMapper.toEntity(new DeckDto(name));
+        DeckEntity newDeck = collectionMapper.map(new DeckDto(name));
         deckRepository.save(newDeck);
         // add deck to player
         PlayerEntity player = findPlayerEntityById(playerId);
@@ -203,37 +247,4 @@ public class PlayerService {
     }
 
 
-    ////////// Paging
-    public OnePageResult<MagicCardDto> findDeckCardsPage(int playerId, int deckId, Pageable pageable) {
-        DeckEntity deck = findDeckEntityById(deckId);
-        List<MagicCardEntity> magicCardEntities = deck.getMagicCardsPaged(pageable);
-        List<MagicCardDto> magicCards = magicCardService.entityToDto(magicCardEntities);
-        int size = deck.getMagicCards().size();
-        return new OnePageResult<>(magicCards, size);
-    }
-
-    public OnePageResult<MagicCardDto> findCollectionCardsPage(int playerId, Pageable pageable) {
-        MainCollectionDto mainCollection = findMainCollection(playerId);
-        List<MagicCardDto> magicCards = mainCollection.getMagicCardsPaged(pageable);
-        int size = mainCollection.getMagicCards().size();
-        return new OnePageResult<>(magicCards, size);
-    }
-
-    public OnePageResult<PlayerDto> findPlayersPage(Pageable pageable) {
-        List<PlayerEntity> players = playerRepository.findAll(pageable).getContent();
-        return new OnePageResult<>(entityToDto(players), playerRepository.count());
-    }
-
-    private List<PlayerDto> entityToDto(List<PlayerEntity> playerEntities) {
-        List<PlayerDto> players = new ArrayList<>();
-        for (PlayerEntity playerEntity : playerEntities) {
-            players.add(playerMapper.toDto(playerEntity));
-        }
-        return players;
-    }
-
-    public OnePageResult<DeckDto> findDecksPage(int playerId, Pageable pageable) {
-        List<DeckDto> decks = findDecks(playerId);
-        return new OnePageResult<>(decks, decks.size());
-    }
 }

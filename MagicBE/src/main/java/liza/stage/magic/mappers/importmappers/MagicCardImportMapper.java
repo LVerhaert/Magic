@@ -1,14 +1,9 @@
 package liza.stage.magic.mappers.importmappers;
 
-import liza.stage.magic.models.magiccards.entities.CardFaceEntity;
-import liza.stage.magic.models.magiccards.entities.MagicCardEntity;
-import liza.stage.magic.models.magiccards.entities.RelatedCardEntity;
-import liza.stage.magic.models.magiccards.enums.Color;
-import liza.stage.magic.models.magiccards.enums.Frame;
-import liza.stage.magic.models.magiccards.json.CardFaceJson;
-import liza.stage.magic.models.magiccards.json.MagicCardJson;
-import liza.stage.magic.models.magiccards.json.RelatedCardJson;
-
+import liza.stage.magic.models.magiccards.magiccardentities.CardFaceEntity;
+import liza.stage.magic.models.magiccards.magiccardentities.MagicCardEntity;
+import liza.stage.magic.models.magiccards.magiccardjson.CardFaceJson;
+import liza.stage.magic.models.magiccards.magiccardjson.MagicCardJson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -17,26 +12,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {RelatedCardImportMapper.class, CardFaceImportMapper.class})
+
+@Mapper(componentModel = "spring", uses = {/*RelatedCardImportMapper.class, */CardFaceImportMapper.class})
 public abstract class MagicCardImportMapper {
 
+    /*
     @Autowired
     private RelatedCardImportMapper relatedCardImportMapper;
+     */
     @Autowired
     private CardFaceImportMapper cardFaceImportMapper;
 
     @Mapping(source = "idString", target = "scryfallId")
-    @Mapping(source = "set", target = "setId")
-    @Mapping(source = "allParts", target = "relatedCards", qualifiedByName = "toRelatedCards")
-    @Mapping(source = "lang", target = "language")
-    @Mapping(source = "cmc", target = "convManaCost")
-    @Mapping(source = "frame", target = "frame", qualifiedByName = "toFrame")
-    @Mapping(source = "colors", target = "colors", qualifiedByName = "toColors")
-    @Mapping(source = "colorIndicator", target = "colorIndicator", qualifiedByName = "toColors")
-    @Mapping(source = "colorIdentity", target = "colorIdentity", qualifiedByName = "toColors")
+//    @Mapping(source = "set", target = "setId")
+//    @Mapping(source = "allParts", target = "relatedCards", qualifiedByName = "toRelatedCards")
+//    @Mapping(source = "lang", target = "language")
+//    @Mapping(source = "cmc", target = "convManaCost")
+//    @Mapping(source = "frame", target = "frame", qualifiedByName = "toFrame")
+//    @Mapping(source = "colors", target = "colors", qualifiedByName = "toColors")
+//    @Mapping(source = "colorIndicator", target = "colorIndicator", qualifiedByName = "toColors")
+//    @Mapping(source = "colorIdentity", target = "colorIdentity", qualifiedByName = "toColors")
     @Mapping(source = "cardFaces", target = "cardFaces", qualifiedByName = "toCardFaces")
+    @Mapping(source = "imageUris.png", target = "imageUris.large")
     public abstract MagicCardEntity map(MagicCardJson magicCardJson);
 
+    /*
     @Named("toFrame")
     Frame toFrame(String frameJson) {
         return Frame.fromString(frameJson);
@@ -52,6 +52,7 @@ public abstract class MagicCardImportMapper {
         }
         return colors;
     }
+     */
 
     @Named("toCardFaces")
     List<CardFaceEntity> toCardFaces(List<CardFaceJson> cardFacesJson) {
@@ -64,7 +65,7 @@ public abstract class MagicCardImportMapper {
         return cardFaceEntities;
     }
 
-
+    /*
     @Named("toRelatedCards")
     List<RelatedCardEntity> toRelatedCards(List<RelatedCardJson> relatedCardsJson) {
         List<RelatedCardEntity> relatedCardEntities = new ArrayList<>();
@@ -75,4 +76,5 @@ public abstract class MagicCardImportMapper {
         }
         return relatedCardEntities;
     }
+     */
 }
