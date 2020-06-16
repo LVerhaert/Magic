@@ -5,6 +5,7 @@ import liza.stage.magic.models.magiccards.magiccarddtos.MagicCardDto;
 import liza.stage.magic.models.magiccards.magiccardentities.MagicCardEntity;
 import liza.stage.magic.repositories.MagicCardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ import java.util.List;
 //import liza.stage.magic.repositories.RelatedCardRepository;
 
 @Service
-@RequiredArgsConstructor
 public class MagicCardService {
-    private final MagicCardRepository magicCardRepository;
-    //    private final RelatedCardRepository relatedCardRepository;
-    private final MagicCardMapper magicCardMapper;
+    @Autowired
+    private MagicCardRepository magicCardRepository;
+    //    @Autowired
+    //    private RelatedCardRepository relatedCardRepository;
+    @Autowired
+    private MagicCardMapper magicCardMapper;
 
     ////////////// Entities
     public MagicCardEntity findEntityById(String id) {

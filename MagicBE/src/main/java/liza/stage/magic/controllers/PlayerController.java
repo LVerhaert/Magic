@@ -6,15 +6,16 @@ import liza.stage.magic.models.players.playerdtos.PlayerDto;
 import liza.stage.magic.services.OnePageResult;
 import liza.stage.magic.services.PlayerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class PlayerController {
-    private final PlayerService playerService;
+    @Autowired
+    private PlayerService playerService;
 
     @GetMapping("/players")
     public OnePageResult<PlayerDto> getPlayers(@RequestParam(required = false, defaultValue = "0") String pageIndex,

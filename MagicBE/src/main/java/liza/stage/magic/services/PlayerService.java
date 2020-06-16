@@ -13,7 +13,7 @@ import liza.stage.magic.models.players.playerentities.PlayerEntity;
 import liza.stage.magic.repositories.playerrepositories.DeckRepository;
 import liza.stage.magic.repositories.playerrepositories.MainCollectionRepository;
 import liza.stage.magic.repositories.playerrepositories.PlayerRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +21,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PlayerService {
-    private final PlayerRepository playerRepository;
-    private final MainCollectionRepository mainCollectionRepository;
-    private final DeckRepository deckRepository;
-    private final MagicCardService magicCardService;
 
-    private final PlayerMapper playerMapper;
-    private final CollectionMapper collectionMapper;
+    @Autowired
+    private PlayerRepository playerRepository;
+    @Autowired
+    private MainCollectionRepository mainCollectionRepository;
+    @Autowired
+    private DeckRepository deckRepository;
+    @Autowired
+    private MagicCardService magicCardService;
+
+    @Autowired
+    private PlayerMapper playerMapper;
+    @Autowired
+    private CollectionMapper collectionMapper;
 
     /////////////// Find
     ///// Entities
